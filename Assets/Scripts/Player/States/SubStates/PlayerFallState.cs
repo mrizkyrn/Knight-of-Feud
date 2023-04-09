@@ -44,18 +44,18 @@ public class PlayerFallState : PlayerState
         {
             stateMachine.ChangeState(player.AttackState);
         }
-        else if (isGrounded && player.CurrentVelocity.y < 0.01f)
+        else if (isGrounded && core.Movement.CurrentVelocity.y < 0.01f)
         {
             stateMachine.ChangeState(player.LandState);
         }
-        else if (isWalled && xInput == player.FacingDirection)
+        else if (isWalled && xInput == core.Movement.FacingDirection)
         {
             stateMachine.ChangeState(player.WallSlideState);
         }
         else
         {
-            player.CheckIfShouldFlip(xInput);
-            player.SetVelocityX(playerData.movementVelocity * xInput);
+            core.Movement.CheckIfShouldFlip(xInput);
+            core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
         }
     }
 
@@ -68,8 +68,8 @@ public class PlayerFallState : PlayerState
     {
         base.DoChecks();
 
-        isGrounded = player.CheckIfGrounded();
-        isWalled = player.CheckIfWalled();
+        isGrounded = core.CollisionSenses.CheckIfGrounded();
+        isWalled = core.CollisionSenses.CheckIfWalled();
         isFallFromWall = player.WallSlideState.fallFromWall;
     }
 }

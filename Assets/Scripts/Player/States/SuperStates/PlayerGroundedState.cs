@@ -57,7 +57,7 @@ public class PlayerGroundedState : PlayerState
             player.InputHandler.UseSlideInput();
             stateMachine.ChangeState(player.SlideState);
         }
-        else if (!isGrounded && player.CurrentVelocity.y < 0.01f)
+        else if (!isGrounded && core.Movement.CurrentVelocity.y < 0.01f)
         {
             stateMachine.ChangeState(player.FallState);
         }
@@ -72,6 +72,6 @@ public class PlayerGroundedState : PlayerState
     {
         base.DoChecks();
 
-        isGrounded = player.CheckIfGrounded();
+        isGrounded = core.CollisionSenses.CheckIfGrounded();
     }
 }

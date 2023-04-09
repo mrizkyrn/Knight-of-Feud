@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerAbilityState
 {
-    private bool isGrounded;
     private bool isWalled;
 
     private bool attackInput;
@@ -20,10 +19,9 @@ public class PlayerJumpState : PlayerAbilityState
     {
         base.Enter();
 
-        // player.InputHandler.UseJumpInput();
         player.Anim.SetBool("isGrounded", isGrounded);
 
-        player.SetVelocityY(playerData.jumpVelocity);
+        core.Movement.SetVelocityY(playerData.jumpVelocity);
         isAbilityDone = true;
 
         DecreaseJumpsLeft();
@@ -42,7 +40,7 @@ public class PlayerJumpState : PlayerAbilityState
 
         if (player.InputHandler.JumpInputStop)
         {
-            player.SetVelocityY(player.CurrentVelocity.y * playerData.jumpHeightMultiplier);
+            core.Movement.SetVelocityY(core.Movement.CurrentVelocity.y * playerData.jumpHeightMultiplier);
         }
 
         if (attackInput && player.AttackState.CheckIfCanAttack())
@@ -50,8 +48,8 @@ public class PlayerJumpState : PlayerAbilityState
             stateMachine.ChangeState(player.AttackState);
         }
 
-        player.CheckIfShouldFlip(xInput);
-        player.SetVelocityX(playerData.movementVelocity * xInput);
+        core.Movement.CheckIfShouldFlip(xInput);
+        core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
     }
 
     public override void PhysicsUpdate()
@@ -62,9 +60,8 @@ public class PlayerJumpState : PlayerAbilityState
     public override void DoChecks()
     {
         base.DoChecks();
-
-        isGrounded = player.CheckIfGrounded();
-        isWalled = player.CheckIfWalled();
+        
+        isWalled = core.CollisionSenses.CheckIfWalled();
     }
 
     public bool CanJump()

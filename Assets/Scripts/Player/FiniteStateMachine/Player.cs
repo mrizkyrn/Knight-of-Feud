@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     public PlayerMoveState MoveState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
     public PlayerFallState FallState { get; private set; }
-    // public PlayerInAirState InAirState { get; private set; }
     public PlayerLandState LandState { get; private set; }
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
@@ -22,18 +21,12 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Components
+    public Core Core { get; private set; }
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
-    public Rigidbody2D Rb { get; private set; }
-    public BoxCollider2D Col { get; private set; }
     #endregion
 
     #region Other Variables
-    public Vector2 CurrentVelocity { get; private set; }
-    public int FacingDirection { get; private set; }
-
-    private Vector2 workspace;
-
     private int lastFrameIndex;
     private float[] frameDeltatimeArray;
     #endregion
@@ -41,13 +34,14 @@ public class Player : MonoBehaviour
     #region Unity Callback Functions
     private void Awake()
     {
+        Core = GetComponentInChildren<Core>();
+
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
         MoveState = new PlayerMoveState(this, StateMachine, playerData, "move");
         JumpState = new PlayerJumpState(this, StateMachine, playerData, "jump");
         FallState = new PlayerFallState(this, StateMachine, playerData, "fall");
-        // InAirState = new PlayerInAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
         WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, "wallSlide");
         WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "jump");
@@ -61,25 +55,21 @@ public class Player : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
-        Rb = GetComponent<Rigidbody2D>();
-        Col = GetComponent<BoxCollider2D>();
 
         StateMachine.Initialize(IdleState);
-
-        FacingDirection = 1;
     }
 
     private void Update()
     {
-        CurrentVelocity = Rb.velocity;
+        Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
 
+        // SHOW FPS
         frameDeltatimeArray[lastFrameIndex] = Time.unscaledDeltaTime;
         lastFrameIndex = (lastFrameIndex + 1) % frameDeltatimeArray.Length;
 
         // Debug.Log(Mathf.RoundToInt(CalculateFPS()));
         // Debug.Log(CheckIfGrounded());
-
     }
 
     private void FixedUpdate()
@@ -87,50 +77,6 @@ public class Player : MonoBehaviour
         StateMachine.CurrentState.PhysicsUpdate();
     }
     #endregion
-
-    public void SetVelocity(float velocity, Vector2 angle, int direction)
-    {
-        angle.Normalize();
-        workspace.Set(angle.x * velocity * direction, angle.y * velocity);
-        Rb.velocity = workspace;
-        CurrentVelocity = workspace;
-    }
-
-    public void SetVelocityX(float velocity)
-    {
-        workspace.Set(velocity, CurrentVelocity.y);
-        Rb.velocity = workspace;
-        CurrentVelocity = workspace;
-    }
-
-    public void SetVelocityY(float velocity)
-    {
-        workspace.Set(CurrentVelocity.x, velocity);
-        Rb.velocity = workspace;
-        CurrentVelocity = workspace;
-    }
-
-    public void CheckIfShouldFlip(float xInput)
-    {
-        if (xInput != 0 && xInput != FacingDirection)
-        {
-            Flip();
-        }
-    }
-
-    public bool CheckIfGrounded()
-    {
-        Vector2 size = new Vector2(Col.bounds.size.x * 0.9f, Col.bounds.size.y);
-        RaycastHit2D rh = Physics2D.BoxCast(Col.bounds.center, size, 0f, Vector2.down, .1f, playerData.platformLayerMask);
-        return rh.collider != null;
-    }
-
-    public bool CheckIfWalled()
-    {
-        Vector2 direction = new Vector2(FacingDirection, 0);
-        RaycastHit2D rh = Physics2D.Raycast(Col.bounds.center, direction, Col.bounds.extents.x + .1f, playerData.platformLayerMask);
-        return rh.collider != null;
-    }
 
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
 
@@ -150,12 +96,6 @@ public class Player : MonoBehaviour
         {
             Anim.SetBool("attack3", true);
         }
-    }
-
-    private void Flip()
-    {
-        FacingDirection *= -1;
-        transform.Rotate(0f, 180f, 0f);
     }
 
     private float CalculateFPS()

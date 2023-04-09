@@ -19,7 +19,7 @@ public class PlayerWallSlideState : PlayerState
         base.Enter();
 
         player.JumpState.DecreaseJumpsLeft();
-        player.Rb.gravityScale = 0;
+        core.Movement.Rb.gravityScale = 0;
 
         player.InputHandler.OnAttackDisable();
     }
@@ -28,7 +28,7 @@ public class PlayerWallSlideState : PlayerState
     {
         base.Exit();
 
-        player.Rb.gravityScale = 5;
+        core.Movement.Rb.gravityScale = 5;
 
         player.InputHandler.OnAttackEnable();
     }
@@ -39,13 +39,13 @@ public class PlayerWallSlideState : PlayerState
 
         xInput = player.InputHandler.NormInputX;
 
-        if (xInput == player.FacingDirection)
+        if (xInput == core.Movement.FacingDirection)
         {
-            player.SetVelocityY(-playerData.grabWallVelocity);
+            core.Movement.SetVelocityY(-playerData.grabWallVelocity);
         }
         else
         {
-            player.SetVelocityY(-playerData.wallSlideVelocity);
+            core.Movement.SetVelocityY(-playerData.wallSlideVelocity);
         }
 
         if (player.InputHandler.JumpInput)
@@ -53,7 +53,7 @@ public class PlayerWallSlideState : PlayerState
             player.WallJumpState.DetermineWallJumpDirection(isWalled);
             stateMachine.ChangeState(player.WallJumpState);
         }
-        else if (!isWalled || xInput == -player.FacingDirection)
+        else if (!isWalled || xInput == -core.Movement.FacingDirection)
         {
             fallFromWall = true;
             stateMachine.ChangeState(player.FallState);
@@ -73,8 +73,8 @@ public class PlayerWallSlideState : PlayerState
     {
         base.DoChecks();
 
-        isGrounded = player.CheckIfGrounded();
-        isWalled = player.CheckIfWalled();
+        isGrounded = core.CollisionSenses.CheckIfGrounded();
+        isWalled = core.CollisionSenses.CheckIfWalled();
     }
 
     public void ResetFallFromWall() => fallFromWall = false;

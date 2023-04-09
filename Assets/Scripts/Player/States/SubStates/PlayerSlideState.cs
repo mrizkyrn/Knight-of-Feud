@@ -7,7 +7,6 @@ public class PlayerSlideState : PlayerAbilityState
     public bool CanSlide { get; private set; }
 
     private bool isWalled;
-    private bool isGrounded;
 
     private float lastSlideTime;
     private float slideStartTime;
@@ -51,9 +50,9 @@ public class PlayerSlideState : PlayerAbilityState
         float slideTime = Time.time - slideStartTime;
         float slideDistance = playerData.slideVelocity * slideTime;
 
-        Vector2 slideDirection = new Vector2(player.FacingDirection, 0f);
+        Vector2 slideDirection = new Vector2(core.Movement.FacingDirection, 0f);
         Vector2 slidePosition = slideStartPosition + slideDirection * Mathf.Min(slideDistance, playerData.maxSlideDistance);
-        player.Rb.MovePosition(slidePosition);
+        core.Movement.Rb.MovePosition(slidePosition);
 
         if (!isExitingState && player.InputHandler.SlideInputStop || slideDistance >= playerData.maxSlideDistance || isWalled || !isGrounded)
         {
@@ -65,8 +64,7 @@ public class PlayerSlideState : PlayerAbilityState
     {
         base.DoChecks();
 
-        isWalled = player.CheckIfWalled();
-        isGrounded = player.CheckIfGrounded();
+        isWalled = core.CollisionSenses.CheckIfWalled();
     }
 
     public bool CheckIfCanSlide()
