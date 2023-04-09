@@ -25,6 +25,8 @@ public class PlayerAttackState : PlayerAbilityState
     public override void Exit()
     {
         base.Exit();
+
+        player.InputHandler.OnAttackEnable();
     }
 
     public override void LogicUpdate()
@@ -37,12 +39,11 @@ public class PlayerAttackState : PlayerAbilityState
         {
             if (attackInput)
             {
+                player.InputHandler.UseAttackInput();
+
                 if (attackCount < 3)
                 {
-                    player.InputHandler.UseAttackInput();
-
                     attackCount++;
-                    attackCount = Mathf.Clamp(attackCount, 0, 2);
 
                     lastAttackTime = Time.time;
                 }

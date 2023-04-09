@@ -191,23 +191,20 @@ public class Player : MonoBehaviour
     //     {
     //         Gizmos.DrawWireCube(center, size);
     //     }
+
+    //     Vector2 direction = new Vector2(FacingDirection, 0); // replace with desired direction
+    //     float distance = Col.bounds.extents.x + 0.1f; // replace with desired distance
+
+    //     // Calculate start and end points of the raycast
+    //     Vector2 origin = Col.bounds.center;
+    //     Vector2 end = origin + direction * distance;
+
+    //     // Perform the raycast
+    //     RaycastHit2D rh = Physics2D.Raycast(origin, direction, distance, playerData.platformLayerMask);
+
+    //     // Draw the raycast using Gizmos
+    //     Gizmos.color = rh.collider != null ? Color.green : Color.red;
+    //     Gizmos.DrawLine(origin, end);
     // }
-
-    private void OnDrawGizmos()
-    {
-        Vector2 direction = new Vector2(FacingDirection, 0); // replace with desired direction
-        float distance = Col.bounds.extents.x + 0.1f; // replace with desired distance
-
-        // Calculate start and end points of the raycast
-        Vector2 origin = Col.bounds.center;
-        Vector2 end = origin + direction * distance;
-
-        // Perform the raycast
-        RaycastHit2D rh = Physics2D.Raycast(origin, direction, distance, playerData.platformLayerMask);
-
-        // Draw the raycast using Gizmos
-        Gizmos.color = rh.collider != null ? Color.green : Color.red;
-        Gizmos.DrawLine(origin, end);
-    }
 
 }
