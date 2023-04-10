@@ -7,6 +7,7 @@ public class PlayerJumpState : PlayerAbilityState
     private bool isWalled;
 
     private bool attackInput;
+    private bool shieldInput;
 
     private int jumpsLeft;
 
@@ -37,19 +38,27 @@ public class PlayerJumpState : PlayerAbilityState
         base.LogicUpdate();
 
         attackInput = player.InputHandler.AttackInput;
+        shieldInput = player.InputHandler.ShieldInput;
 
         if (player.InputHandler.JumpInputStop)
         {
             core.Movement.SetVelocityY(core.Movement.CurrentVelocity.y * playerData.jumpHeightMultiplier);
         }
 
-        if (attackInput && player.AttackState.CheckIfCanAttack())
+        if (!isExitingState)
         {
-            stateMachine.ChangeState(player.AttackState);
-        }
+            if (attackInput && player.AttackState.CheckIfCanAttack())
+            {
+                stateMachine.ChangeState(player.AttackState);
+            }
+            else if (shieldInput)
+            {
+                stateMachine.ChangeState(player.ShieldState);
+            }
 
-        core.Movement.CheckIfShouldFlip(xInput);
-        core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
+            core.Movement.CheckIfShouldFlip(xInput);
+            core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
+        }
     }
 
     public override void PhysicsUpdate()

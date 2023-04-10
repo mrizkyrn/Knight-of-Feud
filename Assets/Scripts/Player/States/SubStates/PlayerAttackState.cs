@@ -36,10 +36,9 @@ public class PlayerAttackState : PlayerAbilityState
         attackInput = player.InputHandler.AttackInput;
 
         
-
         if (!isExitingState)
         {
-            if (isGrounded)
+            if (isGrounded && core.Movement.CurrentVelocity.x != 0)
             {
                 core.Movement.SetVelocityZero();
             }

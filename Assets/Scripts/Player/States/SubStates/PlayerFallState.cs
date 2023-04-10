@@ -9,6 +9,7 @@ public class PlayerFallState : PlayerState
     private bool isFallFromWall;
     private bool jumpInput;
     private bool attackInput;
+    private bool shieldInput;
 
     private int xInput;
 
@@ -34,6 +35,7 @@ public class PlayerFallState : PlayerState
         xInput = player.InputHandler.NormInputX;
         jumpInput = player.InputHandler.JumpInput;
         attackInput = player.InputHandler.AttackInput;
+        shieldInput = player.InputHandler.ShieldInput;
 
         if (jumpInput && player.JumpState.CanJump() && !isFallFromWall)
         {
@@ -43,6 +45,10 @@ public class PlayerFallState : PlayerState
         else if (attackInput && player.AttackState.CheckIfCanAttack())
         {
             stateMachine.ChangeState(player.AttackState);
+        }
+        else if (shieldInput)
+        {
+            stateMachine.ChangeState(player.ShieldState);
         }
         else if (isGrounded && core.Movement.CurrentVelocity.y < 0.01f)
         {

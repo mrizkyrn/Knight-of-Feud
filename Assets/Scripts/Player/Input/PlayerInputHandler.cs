@@ -17,6 +17,8 @@ public class PlayerInputHandler : MonoBehaviour
     public bool SlideInput {get; private set; }
     public bool SlideInputStop { get; private set; }
     public bool AttackInput {get; private set; }
+    public bool ShieldInput {get; private set; }
+    public bool ShieldInputStop { get; private set; }
 
     [SerializeField] private float inputHoldTime = 0.2f;
     
@@ -49,6 +51,8 @@ public class PlayerInputHandler : MonoBehaviour
         playerInput.Gameplay.Slide.started += OnSlide;
         playerInput.Gameplay.Slide.canceled += OnSlide;
         playerInput.Gameplay.Attack.started += OnAttack;
+        playerInput.Gameplay.Shield.started += OnShield;
+        playerInput.Gameplay.Shield.canceled += OnShield;
     }
 
     public void OnAttackEnable()
@@ -64,6 +68,8 @@ public class PlayerInputHandler : MonoBehaviour
         playerInput.Gameplay.Slide.started -= OnSlide;
         playerInput.Gameplay.Slide.canceled -= OnSlide;
         playerInput.Gameplay.Attack.started -= OnAttack;
+        playerInput.Gameplay.Shield.started -= OnShield;
+        playerInput.Gameplay.Shield.canceled -= OnShield;
     }
 
     public void OnAttackDisable()
@@ -113,6 +119,18 @@ public class PlayerInputHandler : MonoBehaviour
         {
             AttackInput = true;
             attackInputStartTime = Time.time;
+        }
+    }
+
+    public void OnShield(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            ShieldInput = true;
+        }
+        else if (context.canceled)
+        {   
+            ShieldInput = false;
         }
     }
 

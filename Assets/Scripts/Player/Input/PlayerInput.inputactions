@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Shield",
+                    "type": "Button",
+                    "id": "6804002f-fc81-497e-95a2-9faf2396f5e4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -111,6 +120,17 @@
                 },
                 {
                     "name": "",
+                    "id": "4714c579-3a7a-4f24-8d5c-fc7c92e1e919",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Dekstop",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f66ad8a2-1186-4170-9e49-1f311aea0405",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -150,6 +170,17 @@
                     "processors": "",
                     "groups": "Dekstop",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09023436-c20b-45e2-b8e4-a0f47eec8b89",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Dekstop",
+                    "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

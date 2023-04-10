@@ -11,6 +11,7 @@ public class PlayerGroundedState : PlayerState
     private bool jumpInput;
     private bool slideInput;
     private bool attackInput;
+    private bool shieldInput;
     private bool isGrounded;
 
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
@@ -42,6 +43,7 @@ public class PlayerGroundedState : PlayerState
         jumpInput = player.InputHandler.JumpInput;
         slideInput = player.InputHandler.SlideInput;
         attackInput = player.InputHandler.AttackInput;
+        shieldInput = player.InputHandler.ShieldInput;
 
         if (jumpInput && player.JumpState.CanJump())
         {
@@ -56,6 +58,10 @@ public class PlayerGroundedState : PlayerState
         {
             player.InputHandler.UseSlideInput();
             stateMachine.ChangeState(player.SlideState);
+        }
+        else if (shieldInput)
+        {
+            stateMachine.ChangeState(player.ShieldState);
         }
         else if (!isGrounded && core.Movement.CurrentVelocity.y < 0.01f)
         {

@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerSlideState SlideState { get; private set; }
     public PlayerAttackState AttackState { get; private set; }
+    public PlayerShieldState ShieldState { get; private set; }
 
     [SerializeField] private PlayerData playerData;
     #endregion
@@ -47,6 +48,7 @@ public class Player : MonoBehaviour
         WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "jump");
         SlideState = new PlayerSlideState(this, StateMachine, playerData, "slide");
         AttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
+        ShieldState = new PlayerShieldState(this, StateMachine, playerData, "shield");
 
         frameDeltatimeArray = new float[50];
     }
@@ -68,7 +70,7 @@ public class Player : MonoBehaviour
         frameDeltatimeArray[lastFrameIndex] = Time.unscaledDeltaTime;
         lastFrameIndex = (lastFrameIndex + 1) % frameDeltatimeArray.Length;
 
-        // Debug.Log(Mathf.RoundToInt(CalculateFPS()));
+        Debug.Log(Mathf.RoundToInt(CalculateFPS()));
         // Debug.Log(CheckIfGrounded());
     }
 

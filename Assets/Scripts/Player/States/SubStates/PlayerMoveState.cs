@@ -11,16 +11,11 @@ public class PlayerMoveState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-
-        player.InputHandler.OnAttackDisable();
     }
 
     public override void Exit()
     {
         base.Exit();
-
-        player.InputHandler.OnAttackEnable();
-
     }
 
     public override void LogicUpdate()
