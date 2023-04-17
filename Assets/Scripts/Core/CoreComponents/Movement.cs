@@ -53,6 +53,11 @@ public class Movement : CoreComponent
         CurrentVelocity = workspace;
     }
 
+    public void SetGravity(float newGravity)
+    {
+        Rb.gravityScale = newGravity;
+    }
+
     public void CheckIfShouldFlip(float xInput)
     {
         if (xInput != 0 && xInput != FacingDirection)

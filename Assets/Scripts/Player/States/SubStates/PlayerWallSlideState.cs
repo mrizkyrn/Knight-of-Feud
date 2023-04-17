@@ -19,7 +19,7 @@ public class PlayerWallSlideState : PlayerState
         base.Enter();
 
         player.JumpState.DecreaseJumpsLeft();
-        core.Movement.Rb.gravityScale = 0;
+        core.Movement.SetGravity(0);
 
         player.InputHandler.OnAttackDisable();
     }
@@ -28,7 +28,7 @@ public class PlayerWallSlideState : PlayerState
     {
         base.Exit();
 
-        core.Movement.Rb.gravityScale = 5;
+        core.Movement.SetGravity(playerData.gravityScale);
 
         player.InputHandler.OnAttackEnable();
     }

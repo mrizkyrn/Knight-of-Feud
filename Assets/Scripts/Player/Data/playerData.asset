@@ -28,6 +28,4 @@ MonoBehaviour:
   slideDistanceMultiplier: 0.5
   attackCooldown: 2
   comboDelay: 0.5
-  platformLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
+  gravityScale: 5

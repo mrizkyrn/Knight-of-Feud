@@ -33,4 +33,7 @@ public class PlayerData : ScriptableObject
     [Header("Attack State")]
     public float attackCooldown = 1f;
     public float comboDelay = 0.3f;
+
+    [Header("Others")]
+    public float gravityScale = 5f;
 }

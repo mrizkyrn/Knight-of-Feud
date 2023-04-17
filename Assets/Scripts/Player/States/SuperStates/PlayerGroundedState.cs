@@ -22,6 +22,8 @@ public class PlayerGroundedState : PlayerState
     {
         base.Enter();
 
+        core.Movement.SetGravity(0f);
+
         player.JumpState.ResetJumpsLeft();
         player.SlideState.ResetCanSlide();
         player.WallSlideState.ResetFallFromWall();
@@ -30,6 +32,8 @@ public class PlayerGroundedState : PlayerState
     public override void Exit()
     {
         base.Exit();
+
+        core.Movement.SetGravity(playerData.gravityScale);
     }
 
     public override void LogicUpdate()
