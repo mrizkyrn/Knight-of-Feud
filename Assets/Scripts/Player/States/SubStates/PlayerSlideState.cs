@@ -54,7 +54,7 @@ public class PlayerSlideState : PlayerAbilityState
         Vector2 slidePosition = slideStartPosition + slideDirection * Mathf.Min(slideDistance, playerData.maxSlideDistance);
         core.Movement.Rb.MovePosition(slidePosition);
 
-        if (!isExitingState && player.InputHandler.SlideInputStop || slideDistance >= playerData.maxSlideDistance || isWalled || !isGrounded)
+        if (player.InputHandler.SlideInputStop || slideDistance >= playerData.maxSlideDistance || isWalled || !isGrounded)
         {
             isAbilityDone = true;
         }

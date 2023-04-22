@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     public Core Core { get; private set; }
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
+    [SerializeField] TMP_Text fpsText;
     #endregion
 
     #region Other Variables
@@ -70,7 +72,7 @@ public class Player : MonoBehaviour
         frameDeltatimeArray[lastFrameIndex] = Time.unscaledDeltaTime;
         lastFrameIndex = (lastFrameIndex + 1) % frameDeltatimeArray.Length;
 
-        Debug.Log(Mathf.RoundToInt(CalculateFPS()));
+        fpsText.text = "fps: " + Mathf.RoundToInt(CalculateFPS()).ToString();
         // Debug.Log(CheckIfGrounded());
     }
 
@@ -110,43 +112,5 @@ public class Player : MonoBehaviour
 
         return frameDeltatimeArray.Length / total;
     }
-
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.color = Color.yellow;
-
-    //     // Calculate the center and size of the box based on the collider's bounds
-    //     Vector2 center = Col.bounds.center;
-
-    //     Vector2 size = new Vector2(Col.bounds.size.x * 0.9f, Col.bounds.size.y);
-
-    //     // Perform a BoxCast2D downwards from the center of the box
-    //     RaycastHit2D hit = Physics2D.BoxCast(center, size, 0f, Vector2.down, 0.1f, playerData.platformLayerMask);
-
-    //     // Draw the BoxCast2D gizmo
-    //     if (hit.collider != null)
-    //     {
-    //         Gizmos.color = Color.green;
-    //         Gizmos.DrawWireCube(hit.point, size);
-    //     }
-    //     else
-    //     {
-    //         Gizmos.DrawWireCube(center, size);
-    //     }
-
-    //     Vector2 direction = new Vector2(FacingDirection, 0); // replace with desired direction
-    //     float distance = Col.bounds.extents.x + 0.1f; // replace with desired distance
-
-    //     // Calculate start and end points of the raycast
-    //     Vector2 origin = Col.bounds.center;
-    //     Vector2 end = origin + direction * distance;
-
-    //     // Perform the raycast
-    //     RaycastHit2D rh = Physics2D.Raycast(origin, direction, distance, playerData.platformLayerMask);
-
-    //     // Draw the raycast using Gizmos
-    //     Gizmos.color = rh.collider != null ? Color.green : Color.red;
-    //     Gizmos.DrawLine(origin, end);
-    // }
 
 }

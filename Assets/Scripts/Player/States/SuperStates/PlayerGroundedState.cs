@@ -7,6 +7,10 @@ public class PlayerGroundedState : PlayerState
     protected Vector2 input;
     protected int xInput;
     protected int yInput;
+    protected bool isSloped;
+    protected bool isOnSlope;
+    protected float slopeAngle;
+
 
     private bool jumpInput;
     private bool slideInput;
@@ -22,8 +26,6 @@ public class PlayerGroundedState : PlayerState
     {
         base.Enter();
 
-        core.Movement.SetGravity(0f);
-
         player.JumpState.ResetJumpsLeft();
         player.SlideState.ResetCanSlide();
         player.WallSlideState.ResetFallFromWall();
@@ -33,7 +35,7 @@ public class PlayerGroundedState : PlayerState
     {
         base.Exit();
 
-        core.Movement.SetGravity(playerData.gravityScale);
+        core.Movement.Rb.sharedMaterial = playerData.noFrictionMaterial;
     }
 
     public override void LogicUpdate()
@@ -48,6 +50,8 @@ public class PlayerGroundedState : PlayerState
         slideInput = player.InputHandler.SlideInput;
         attackInput = player.InputHandler.AttackInput;
         shieldInput = player.InputHandler.ShieldInput;
+
+        SlopeUpdate();
 
         if (jumpInput && player.JumpState.CanJump())
         {
@@ -83,5 +87,33 @@ public class PlayerGroundedState : PlayerState
         base.DoChecks();
 
         isGrounded = core.CollisionSenses.CheckIfGrounded();
+        isSloped = core.CollisionSenses.CheckIfSloped();
+    }
+
+    private void SlopeUpdate()
+    {
+        if (isSloped)
+        {
+            Vector2 p = Vector2.Perpendicular(core.CollisionSenses.hitSlope.normal).normalized;
+            slopeAngle = Vector2.Angle(core.CollisionSenses.hitSlope.normal, Vector2.up);
+            isOnSlope = slopeAngle != 0;
+        }
+
+        if (isOnSlope && xInput == 0)
+        {
+            if (core.Movement.Rb.sharedMaterial != playerData.frictionMaterial)
+            {
+                core.Movement.Rb.sharedMaterial = playerData.frictionMaterial;
+                Debug.Log("Change Material");
+            }
+        }
+        else
+        {
+            if (core.Movement.Rb.sharedMaterial != playerData.noFrictionMaterial)
+            {
+                core.Movement.Rb.sharedMaterial = playerData.noFrictionMaterial;
+                Debug.Log("Change Material");
+            }
+        }
     }
 }

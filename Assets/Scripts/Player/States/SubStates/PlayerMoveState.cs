@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerGroundedState
 {
+    private Vector2 perpendicularSpeed;
+
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -23,8 +25,16 @@ public class PlayerMoveState : PlayerGroundedState
         base.LogicUpdate();
 
         core.Movement.CheckIfShouldFlip(xInput);
+        perpendicularSpeed = Vector2.Perpendicular(core.CollisionSenses.hitSlope.normal).normalized;
 
-        core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
+        if (isOnSlope)
+        {
+            core.Movement.SetVelocityX(playerData.movementVelocity * -xInput * perpendicularSpeed.x);
+        }
+        else
+        {
+            core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
+        }
 
         if (xInput == 0 && !isExitingState)
         {

@@ -34,6 +34,10 @@ public class PlayerData : ScriptableObject
     public float attackCooldown = 1f;
     public float comboDelay = 0.3f;
 
+    [Header("Materials")]
+    public PhysicsMaterial2D frictionMaterial;
+    public PhysicsMaterial2D noFrictionMaterial;
+
     [Header("Others")]
     public float gravityScale = 5f;
 }

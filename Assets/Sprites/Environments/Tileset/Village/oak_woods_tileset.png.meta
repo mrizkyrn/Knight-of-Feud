@@ -4042,7 +4042,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -6, y: -6}
+        - {x: -6, y: 6}
+        - {x: 6, y: 0}
+        - {x: 6, y: -6}
       tessellationDetail: 0
       bones: []
       spriteID: f4f16985c8ebe0346bbe7fbe09431fb9
@@ -4063,7 +4067,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -6, y: -6}
+        - {x: -6, y: 0}
+        - {x: 6, y: -6}
+        - {x: 6, y: -6}
       tessellationDetail: 0
       bones: []
       spriteID: c40de53699610264291cd8b2b7cbb59d
@@ -4386,7 +4394,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -6, y: -6}
+        - {x: -6, y: 6}
+        - {x: 6, y: 0}
+        - {x: 6, y: -6}
       tessellationDetail: 0
       bones: []
       spriteID: 965bb05a2eb56b64f82779244a2bbbb5
@@ -4407,7 +4419,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -6, y: -6}
+        - {x: -6, y: 0}
+        - {x: 6, y: -6}
+        - {x: 6, y: -6}
       tessellationDetail: 0
       bones: []
       spriteID: d373472a6c9c20544a69c36407573760
@@ -5402,7 +5418,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -6, y: -6}
+        - {x: -6, y: 6}
+        - {x: 6, y: 0}
+        - {x: 6, y: -6}
       tessellationDetail: 0
       bones: []
       spriteID: e15e8b5ec4c11094681671c30c1ca20f
@@ -5423,7 +5443,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -6, y: -6}
+        - {x: -6, y: 0}
+        - {x: 6, y: -6}
+        - {x: 6, y: -6}
       tessellationDetail: 0
       bones: []
       spriteID: 3180d4e39ed215e42beef364b20e1f95
@@ -5872,7 +5896,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -6, y: -6}
+        - {x: -6, y: 6}
+        - {x: 6, y: 0}
+        - {x: 6, y: -6}
       tessellationDetail: 0
       bones: []
       spriteID: 7c19a80cf8860e249bb1f7c44c0f5c87
@@ -5893,7 +5921,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -6, y: -6}
+        - {x: -6, y: 0}
+        - {x: 6, y: -6}
+        - {x: 6, y: -6}
       tessellationDetail: 0
       bones: []
       spriteID: 4a28ba40648504c4cb25fa777e66a987
@@ -12258,7 +12290,6 @@ TextureImporter:
       oak_woods_tileset_436: 743683006
       oak_woods_tileset_274: -1766796789
       oak_woods_tileset_504: -27462796
-      oak_woods_tileset_241: -459202097
       oak_woods_tileset_319: 1266559361
       oak_woods_tileset_368: -308884736
       oak_woods_tileset_142: 964051023
@@ -12282,6 +12313,7 @@ TextureImporter:
       oak_woods_tileset_6: -1764296860
       oak_woods_tileset_508: -581148953
       oak_woods_tileset_543: -256517889
+      oak_woods_tileset_345: 1785801591
       oak_woods_tileset_64: -1405081245
       oak_woods_tileset_388: 910037496
       oak_woods_tileset_79: 443819434
@@ -12836,13 +12868,13 @@ TextureImporter:
       oak_woods_tileset_188: -270900383
       oak_woods_tileset_415: -869837568
       oak_woods_tileset_110: -1657894592
-      oak_woods_tileset_345: 1785801591
-      oak_woods_tileset_177: -1298669737
-      oak_woods_tileset_184: -657281376
-      oak_woods_tileset_175: -449787640
+      oak_woods_tileset_241: -459202097
       oak_woods_tileset_196: 1208648405
-      oak_woods_tileset_410: -1186078537
+      oak_woods_tileset_177: -1298669737
+      oak_woods_tileset_175: -449787640
+      oak_woods_tileset_184: -657281376
       oak_woods_tileset_232: -1485323128
+      oak_woods_tileset_410: -1186078537
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

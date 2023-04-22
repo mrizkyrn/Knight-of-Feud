@@ -35,7 +35,7 @@ public class PlayerState
         
         startTime = Time.time;
 
-        Debug.Log(animBoolName);
+        // Debug.Log("player: " + animBoolName);
 
         isAnimationFinsihed = false;
         isExitingState = false;
