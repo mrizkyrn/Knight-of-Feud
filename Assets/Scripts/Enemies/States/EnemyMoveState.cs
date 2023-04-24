@@ -6,6 +6,7 @@ public class EnemyMoveState : EnemyState
 {
     protected bool isWalled;
     protected bool isLedged;
+    protected bool isPlayerInMinAgroRange;
 
     public EnemyMoveState(Entity entity, string animBoolName) : base(entity, animBoolName)
     {
@@ -38,5 +39,6 @@ public class EnemyMoveState : EnemyState
 
         isWalled = entity.Core.CollisionSenses.CheckIfWalled();
         isLedged = entity.Core.CollisionSenses.CheckIfLedged();
+        isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
     }
 }

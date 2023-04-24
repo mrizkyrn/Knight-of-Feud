@@ -54,17 +54,17 @@ public class Entity : MonoBehaviour
 
     public virtual bool CheckPlayerInMinAgroRange()
     {
-        return Physics2D.Raycast(playerCheck.position, transform.right, enemyData.minAgroDistance, enemyData.whatIsPlayer);
+        return Physics2D.Raycast(playerCheck.position, transform.right, enemyData.minAgroDistance, enemyData.playerLayerMask);
     }
 
     public virtual bool CheckPlayerInMaxAgroRange()
     {
-        return Physics2D.Raycast(playerCheck.position, transform.right, enemyData.maxAgroDistance, enemyData.whatIsPlayer);
+        return Physics2D.Raycast(playerCheck.position, transform.right, enemyData.maxAgroDistance, enemyData.playerLayerMask);
     }
 
     public virtual bool CheckPlayerInCloseRangeAction()
     {
-        return Physics2D.Raycast(playerCheck.position, transform.right, enemyData.closeRangeActionDistance, enemyData.whatIsPlayer);
+        return Physics2D.Raycast(playerCheck.position, transform.right, enemyData.closeRangeActionDistance, enemyData.playerLayerMask);
     }
 
     public virtual void DamageHop(float velocity)

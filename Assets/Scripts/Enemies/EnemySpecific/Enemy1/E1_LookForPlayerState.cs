@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E1_IdleState : EnemyIdleState
+public class E1_LookForPlayerState : EnemyLookForPlayerState
 {
-    private Enemy1 enemy;
+    Enemy1 enemy;
 
-    public E1_IdleState(Entity entity, string animBoolName, Enemy1 enemy) : base(entity, animBoolName)
+    public E1_LookForPlayerState(Entity entity, string animBoolName, Enemy1 enemy) : base(entity, animBoolName)
     {
         this.enemy = enemy;
     }
@@ -29,12 +29,11 @@ public class E1_IdleState : EnemyIdleState
         {
             entity.StateMachine.ChangeState(enemy.PlayerDetectedState);
         }
-        else if (isIdleTimeOver)
+        else if (isAllTurnsTimeDone)
         {
             entity.StateMachine.ChangeState(enemy.MoveState);
         }
     }
-
 
     public override void PhysicsUpdate()
     {

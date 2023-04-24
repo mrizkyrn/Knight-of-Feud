@@ -7,11 +7,22 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     [Header("Idle State")]
-    public float minIdleTime;
-    public float maxIdleTime;
+    public float minIdleTime = 1f;
+    public float maxIdleTime = 2f;
 
     [Header("Move State")]
-    public float movementVelocity = 10f;
+    public float movementVelocity = 3f;
+
+    [Header("Player Detected State")]
+    public float longRangeActionTime = 1.5f;
+
+    [Header("Charge State")]
+    public float chargeSpeed = 6f;
+    public float chargeTime = 2f;
+
+    [Header("Look For Player State")]
+    public int amountOfTurns = 2;
+    public float timeBetweenTurns = 0.75f;
 
     [Header("Others")]
     public float maxHealth = 30f;
@@ -31,7 +42,7 @@ public class EnemyData : ScriptableObject
     public float closeRangeActionDistance = 1f;
 
     public GameObject hitParticle;
-
-    public LayerMask whatIsGround;
-    public LayerMask whatIsPlayer;
+    
+    public LayerMask playerLayerMask;
+    public LayerMask platformLayerMask;
 }

@@ -15,20 +15,25 @@ MonoBehaviour:
   minIdleTime: 1
   maxIdleTime: 2
   movementVelocity: 3
+  longRangeActionTime: 1.5
+  chargeSpeed: 6
+  chargeTime: 2
+  amountOfTurns: 2
+  timeBetweenTurns: 0.75
   maxHealth: 30
   damageHopSpeed: 3
   wallCheckDistance: 0.2
   ledgeCheckDistance: 0.4
   groundCheckRadius: 0.3
-  minAgroDistance: 3
-  maxAgroDistance: 4
+  minAgroDistance: 7
+  maxAgroDistance: 12
   stunResistance: 3
   stunRecoveryTime: 2
   closeRangeActionDistance: 1
   hitParticle: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
-  whatIsPlayer:
+  playerLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  platformLayerMask:
+    serializedVersion: 2
+    m_Bits: 64

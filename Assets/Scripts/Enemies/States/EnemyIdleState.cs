@@ -18,7 +18,7 @@ public class EnemyIdleState : EnemyState
     {
         base.Enter();
 
-        entity.Core.Movement.SetVelocityX(0f);
+        entity.Core.Movement?.SetVelocityX(0f);
         isIdleTimeOver = false;        
         SetRandomIdleTime();
     }
@@ -29,7 +29,7 @@ public class EnemyIdleState : EnemyState
 
         if (flipAfterIdle)
         {
-            entity.Core.Movement.Flip();
+            entity.Core.Movement?.Flip();
         }
     }
 

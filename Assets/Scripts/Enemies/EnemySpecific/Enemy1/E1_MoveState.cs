@@ -30,9 +30,11 @@ public class E1_MoveState : EnemyMoveState
     {
         base.PhysicsUpdate();
 
-        Debug.Log(isLedged);
-
-        if (isWalled || !isLedged)
+        if (isPlayerInMinAgroRange)
+        {
+            entity.StateMachine.ChangeState(enemy.PlayerDetectedState);
+        }
+        else if (isWalled || !isLedged)
         {
             enemy.IdleState.SetFlipAfterIdle(true);
             entity.StateMachine.ChangeState(enemy.IdleState);
