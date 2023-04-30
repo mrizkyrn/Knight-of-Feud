@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E1_ChargeState : EnemyChargeState
+public class E1_MeleeAttackState : EnemyMeleeAttackState
 {
     Enemy1 enemy;
 
-    public E1_ChargeState(Entity entity, string animBoolName, Enemy1 enemy) : base(entity, animBoolName)
+    public E1_MeleeAttackState(Entity entity, string animBoolName, Transform attackPosition, Enemy1 enemy) : base(entity, animBoolName, attackPosition)
     {
         this.enemy = enemy;
     }
@@ -21,19 +21,16 @@ public class E1_ChargeState : EnemyChargeState
         base.Exit();
     }
 
+    public override void FinishAttack()
+    {
+        base.FinishAttack();
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        
-        if (performCloseRangeAction)
-        {
-            entity.StateMachine.ChangeState(enemy.MeleeAttackState);
-        }
-        else if (!isLedged || isWalled || !isPlayerInMinAgroRange)
-        {
-            entity.StateMachine.ChangeState(enemy.LookForPlayerState);
-        }
-        else if (isChargeTimeOver)
+
+        if (isAnimationFinished)
         {
             if (isPlayerInMinAgroRange)
             {
@@ -54,5 +51,10 @@ public class E1_ChargeState : EnemyChargeState
     public override void DoChecks()
     {
         base.DoChecks();
+    }
+
+    public override void TriggerAttack()
+    {
+        base.TriggerAttack();
     }
 }

@@ -26,7 +26,7 @@ MonoBehaviour:
   slideVelocity: 30
   maxSlideDistance: 10
   slideDistanceMultiplier: 0.5
-  attackCooldown: 2
+  attackCooldown: 1
   comboDelay: 0.5
   frictionMaterial: {fileID: 6200000, guid: 90c4aec2add85fa47a3f982c1679dc16, type: 2}
   noFrictionMaterial: {fileID: 6200000, guid: a6912955c7644ea48a0e4fe5e0150e87, type: 2}

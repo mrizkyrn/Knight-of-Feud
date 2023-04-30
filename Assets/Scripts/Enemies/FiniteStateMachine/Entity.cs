@@ -11,6 +11,7 @@ public class Entity : MonoBehaviour
     public Core Core { get; private set; }
 
     public Animator Anim { get; private set; }
+    public AnimationToStateMachine Atsm { get; private set; }
 
     public int lastDamageDirection { get; private set; }
 
@@ -33,6 +34,7 @@ public class Entity : MonoBehaviour
 		currentStunResistance = enemyData.stunResistance;
 
 		Anim = GetComponent<Animator>();
+        Atsm = GetComponent<AnimationToStateMachine>();
 
 		StateMachine = new EnemyStateMachine();
 	}
@@ -79,16 +81,16 @@ public class Entity : MonoBehaviour
         currentStunResistance = enemyData.stunResistance;
     }
 
-    // public virtual void OnDrawGizmos()
-    // {
-    //     if(Core != null)
-    //     {
-    //         Gizmos.DrawLine(Core.CollisionSenses.Col.bounds.center, Core.CollisionSenses.Col.bounds.center + (Vector3)(Vector2.right * Core.Movement.FacingDirection * enemyData.wallCheckDistance));
-    //         Gizmos.DrawLine(Core.CollisionSenses.Col.bounds.center, Core.CollisionSenses.Col.bounds.center + (Vector3)(Vector2.down * enemyData.ledgeCheckDistance));
+    public virtual void OnDrawGizmos()
+    {
+        if(Core != null)
+        {
+            // Gizmos.DrawLine(Core.CollisionSenses.Col.bounds.center, Core.CollisionSenses.Col.bounds.center + (Vector3)(Vector2.right * Core.Movement.FacingDirection * enemyData.wallCheckDistance));
+            // Gizmos.DrawLine(Core.CollisionSenses.Col.bounds.center, Core.CollisionSenses.Col.bounds.center + (Vector3)(Vector2.down * enemyData.ledgeCheckDistance));
 
-    //         Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Vector2.right * enemyData.closeRangeActionDistance), 0.2f);
-    //         Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Vector2.right * enemyData.minAgroDistance), 0.2f);
-    //         Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Vector2.right * enemyData.maxAgroDistance), 0.2f);
-    //     }       
-    // }
+            Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Core.Movement.FacingDirection * Vector2.right * enemyData.closeRangeActionDistance), 0.2f);
+            Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Core.Movement.FacingDirection * Vector2.right * enemyData.minAgroDistance), 0.2f);
+            Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Core.Movement.FacingDirection * Vector2.right * enemyData.maxAgroDistance), 0.2f);
+        }       
+    }
 }

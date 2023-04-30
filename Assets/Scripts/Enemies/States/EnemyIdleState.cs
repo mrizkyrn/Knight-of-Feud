@@ -51,6 +51,7 @@ public class EnemyIdleState : EnemyState
     public override void DoChecks()
     {
         base.DoChecks();
+		isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
     }
     
     public void SetFlipAfterIdle(bool flip)

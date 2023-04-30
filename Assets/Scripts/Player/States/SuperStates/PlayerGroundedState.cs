@@ -104,7 +104,6 @@ public class PlayerGroundedState : PlayerState
             if (core.Movement.Rb.sharedMaterial != playerData.frictionMaterial)
             {
                 core.Movement.Rb.sharedMaterial = playerData.frictionMaterial;
-                Debug.Log("Change Material");
             }
         }
         else
@@ -112,7 +111,6 @@ public class PlayerGroundedState : PlayerState
             if (core.Movement.Rb.sharedMaterial != playerData.noFrictionMaterial)
             {
                 core.Movement.Rb.sharedMaterial = playerData.noFrictionMaterial;
-                Debug.Log("Change Material");
             }
         }
     }

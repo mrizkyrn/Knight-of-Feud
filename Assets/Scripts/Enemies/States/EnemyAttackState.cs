@@ -1,0 +1,51 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyAttackState : EnemyState
+{
+    protected Transform attackPosition;
+
+    protected bool isAnimationFinished;
+	protected bool isPlayerInMinAgroRange;
+
+    public EnemyAttackState(Entity entity, string animBoolName, Transform attackPosition) : base(entity, animBoolName)
+    {
+        this.attackPosition = attackPosition;
+    }
+
+    public override void Enter() {
+		base.Enter();
+
+        entity.Atsm.attackState = this;
+		isAnimationFinished = false;
+		entity.Core.Movement?.SetVelocityX(0f);
+	}
+
+	public override void Exit() {
+		base.Exit();
+	}
+
+	public override void LogicUpdate() {
+		base.LogicUpdate();
+		// entity.Core.Movement?.SetVelocityX(0f);
+	}
+
+	public override void PhysicsUpdate() {
+		base.PhysicsUpdate();
+	}
+
+    public override void DoChecks() {
+		base.DoChecks();
+
+		isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
+	}
+
+    public virtual void TriggerAttack() {
+
+	}
+
+	public virtual void FinishAttack() {
+		isAnimationFinished = true;
+	}
+}

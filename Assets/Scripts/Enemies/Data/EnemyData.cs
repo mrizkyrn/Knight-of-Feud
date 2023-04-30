@@ -24,14 +24,22 @@ public class EnemyData : ScriptableObject
     public int amountOfTurns = 2;
     public float timeBetweenTurns = 0.75f;
 
+    [Header("Melee Attack State")]
+    public float meleeAttackRadius = 0.5f;
+    public float meleeAttackDamage = 10f;
+
+    public Vector2 knockbackAngle = Vector2.one;
+    public float knockbackStrength = 10f;
+
+
     [Header("Others")]
     public float maxHealth = 30f;
 
     public float damageHopSpeed = 3f;
 
-    public float wallCheckDistance = 0.2f;
-    public float ledgeCheckDistance = 0.4f;
-    public float groundCheckRadius = 0.3f;
+    // public float wallCheckDistance = 0.2f;
+    // public float ledgeCheckDistance = 0.4f;
+    // public float groundCheckRadius = 0.3f;
 
     public float minAgroDistance = 3f;
     public float maxAgroDistance = 4f;

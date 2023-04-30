@@ -15,11 +15,15 @@ MonoBehaviour:
   minIdleTime: 1
   maxIdleTime: 2
   movementVelocity: 3
-  longRangeActionTime: 1.5
+  longRangeActionTime: 0.5
   chargeSpeed: 6
   chargeTime: 2
   amountOfTurns: 2
   timeBetweenTurns: 0.75
+  meleeAttackRadius: 0.5
+  meleeAttackDamage: 10
+  knockbackAngle: {x: 1, y: 1}
+  knockbackStrength: 10
   maxHealth: 30
   damageHopSpeed: 3
   wallCheckDistance: 0.2
