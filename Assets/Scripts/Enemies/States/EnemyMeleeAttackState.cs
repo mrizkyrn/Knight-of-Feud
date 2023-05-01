@@ -37,7 +37,6 @@ public class EnemyMeleeAttackState : EnemyAttackState
 
 		Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackPosition.position, entity.enemyData.meleeAttackRadius, entity.enemyData.playerLayerMask);
 
-        Debug.Log(entity.enemyData.meleeAttackDamage);
 		foreach (Collider2D collider in detectedObjects) 
         {
 			IDamageable damageable = collider.GetComponent<IDamageable>();

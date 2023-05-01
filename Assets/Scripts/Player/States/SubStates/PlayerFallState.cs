@@ -37,7 +37,7 @@ public class PlayerFallState : PlayerState
         attackInput = player.InputHandler.AttackInput;
         shieldInput = player.InputHandler.ShieldInput;
 
-        if (jumpInput && player.JumpState.CanJump() && !isFallFromWall)
+        if (jumpInput && player.JumpState.CheckIfCanJump() && !isFallFromWall)
         {
             player.InputHandler.UseJumpInput();
             stateMachine.ChangeState(player.JumpState);

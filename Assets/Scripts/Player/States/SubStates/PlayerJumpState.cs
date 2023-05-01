@@ -73,7 +73,7 @@ public class PlayerJumpState : PlayerAbilityState
         isWalled = core.CollisionSenses.CheckIfWalled();
     }
 
-    public bool CanJump()
+    public bool CheckIfCanJump()
     {
         return jumpsLeft > 0 ? true : false;
     }

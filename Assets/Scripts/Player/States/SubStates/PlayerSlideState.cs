@@ -21,6 +21,7 @@ public class PlayerSlideState : PlayerAbilityState
     {
         base.Enter();
 
+        player.InputHandler.UseSlideInput();
         CanSlide = false;
 
         slideStartTime = Time.time;
@@ -41,6 +42,13 @@ public class PlayerSlideState : PlayerAbilityState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if (Time.time >= slideStartTime + playerData.maxSlideTime)
+        {
+            Debug.Log("habis");
+            isAbilityDone = true;
+            stateMachine.ChangeState(player.IdleState);
+        }
     }
 
     public override void PhysicsUpdate()

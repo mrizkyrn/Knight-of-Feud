@@ -20,12 +20,18 @@ public class PlayerAttackState : PlayerAbilityState
 
         player.InputHandler.UseAttackInput();
         lastAttackTime = Time.time;
+        attackCount = 0;
+        
+        player.Anim.SetTrigger("attack1");
     }
 
     public override void Exit()
     {
         base.Exit();
 
+        player.Anim.ResetTrigger("attack1");
+        player.Anim.ResetTrigger("attack2");
+        player.Anim.ResetTrigger("attack3");
         player.InputHandler.OnAttackEnable();
     }
 
@@ -35,14 +41,8 @@ public class PlayerAttackState : PlayerAbilityState
 
         attackInput = player.InputHandler.AttackInput;
 
-
         if (!isExitingState)
         {
-            if (isGrounded && core.Movement.CurrentVelocity.x != 0)
-            {
-                core.Movement.SetVelocityZero();
-            }
-
             if (attackInput)
             {
                 player.InputHandler.UseAttackInput();
@@ -50,24 +50,18 @@ public class PlayerAttackState : PlayerAbilityState
                 if (attackCount < 3)
                 {
                     attackCount++;
-
                     lastAttackTime = Time.time;
-                }
+                }   
                 else
                 {
+                    attackCount = 2;
                     player.InputHandler.OnAttackDisable();
                 }
             }
 
-
             if (Time.time >= lastAttackTime + playerData.comboDelay)
             {
-                attackCount = 0;
-                player.Anim.SetBool("attack2", false);
-                player.Anim.SetBool("attack3", false);
-
                 isAbilityDone = true;
-
                 CanAttack = false;
             }
         }

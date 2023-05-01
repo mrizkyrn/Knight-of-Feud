@@ -28,11 +28,13 @@ public class PlayerData : ScriptableObject
     public float slideCooldown = 2f;
     public float slideVelocity = 30f;
     public float maxSlideDistance = 5f;
+    public float maxSlideTime = 2f;
     public float slideDistanceMultiplier = 0.5f;
 
     [Header("Attack State")]
-    public float attackCooldown = 1f;
-    public float comboDelay = 0.3f;
+    public float attackCooldown = 1.5f;
+    public float comboDelay = 0.5f;
+    public float[] movementAttack;
 
     [Header("Materials")]
     public PhysicsMaterial2D frictionMaterial;

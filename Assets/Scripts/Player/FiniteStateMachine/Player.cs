@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
     {
         if (AttackState.attackCount >= 1)
         {
-            Anim.SetBool("attack2", true);
+            Anim.SetTrigger("attack2");
         }
     }
 
@@ -98,8 +98,18 @@ public class Player : MonoBehaviour
     {
         if (AttackState.attackCount >= 2)
         {
-            Anim.SetBool("attack3", true);
+            Anim.SetTrigger("attack3");
         }
+    }
+
+    private void MovementStartTrigger()
+    {
+        Core.Movement.SetVelocityX(playerData.movementAttack[AttackState.attackCount] * Core.Movement.FacingDirection);
+    }
+
+    private void MovementStopTrigger()
+    {
+        Core.Movement.SetVelocityZero();
     }
 
     private float CalculateFPS()

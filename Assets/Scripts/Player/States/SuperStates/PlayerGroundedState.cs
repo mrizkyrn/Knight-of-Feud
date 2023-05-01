@@ -53,7 +53,7 @@ public class PlayerGroundedState : PlayerState
 
         SlopeUpdate();
 
-        if (jumpInput && player.JumpState.CanJump())
+        if (jumpInput && player.JumpState.CheckIfCanJump())
         {
             player.InputHandler.UseJumpInput();
             stateMachine.ChangeState(player.JumpState);
@@ -64,7 +64,6 @@ public class PlayerGroundedState : PlayerState
         }
         else if (slideInput && player.SlideState.CheckIfCanSlide())
         {
-            player.InputHandler.UseSlideInput();
             stateMachine.ChangeState(player.SlideState);
         }
         else if (shieldInput)
