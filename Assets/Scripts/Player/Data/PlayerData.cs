@@ -32,6 +32,10 @@ public class PlayerData : ScriptableObject
     public float slideDistanceMultiplier = 0.5f;
 
     [Header("Attack State")]
+    public float attackRange = 1f;
+    public float attackDamage = 10f;
+    public Vector2 knockbackAngle = Vector2.one;
+    public float knockbackStrength = 10f;
     public float attackCooldown = 1.5f;
     public float comboDelay = 0.5f;
     public float[] movementAttack;
@@ -42,4 +46,5 @@ public class PlayerData : ScriptableObject
 
     [Header("Others")]
     public float gravityScale = 5f;
+    public LayerMask enemyLayerMask;
 }

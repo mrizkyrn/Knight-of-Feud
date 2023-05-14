@@ -28,7 +28,11 @@ public class EnemyAttackState : EnemyState
 
 	public override void LogicUpdate() {
 		base.LogicUpdate();
-		// entity.Core.Movement?.SetVelocityX(0f);
+
+		if (entity.Core.Movement.CurrentVelocity.x != 0f)
+		{
+			entity.Core.Movement?.SetVelocityZero();
+		}
 	}
 
 	public override void PhysicsUpdate() {

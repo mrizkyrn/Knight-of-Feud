@@ -25,9 +25,16 @@ public class Enemy1 : Entity
         MeleeAttackState = new E1_MeleeAttackState(this, "meleeAttack", meleeAttackPosition,this);
     }
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
+
         StateMachine.Initialize(MoveState);
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
     }
 
     public override void OnDrawGizmos()

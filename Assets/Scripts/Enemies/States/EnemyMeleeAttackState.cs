@@ -8,31 +8,38 @@ public class EnemyMeleeAttackState : EnemyAttackState
     {
     }
 
-    public override void Enter() {
+    public override void Enter() 
+	{
 		base.Enter();
 	}
 
-	public override void Exit() {
+	public override void Exit() 
+	{
 		base.Exit();
 	}
 
-	public override void FinishAttack() {
+	public override void FinishAttack() 
+	{
 		base.FinishAttack();
 	}
 
-	public override void LogicUpdate() {
+	public override void LogicUpdate() 
+	{
 		base.LogicUpdate();
 	}
 
-	public override void PhysicsUpdate() {
+	public override void PhysicsUpdate() 
+	{
 		base.PhysicsUpdate();
 	}
 
-    public override void DoChecks() {
+    public override void DoChecks() 
+	{
 		base.DoChecks();
 	}
 
-    public override void TriggerAttack() {
+    public override void TriggerAttack() 
+	{
 		base.TriggerAttack();
 
 		Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackPosition.position, entity.enemyData.meleeAttackRadius, entity.enemyData.playerLayerMask);
@@ -43,14 +50,16 @@ public class EnemyMeleeAttackState : EnemyAttackState
 
 			if (damageable != null) 
             {
+				Debug.Log(collider.gameObject.transform.parent.parent.name);
 				damageable.Damage(entity.enemyData.meleeAttackDamage);
 			}
 
-		// 	IKnockbackable knockbackable = collider.GetComponent<IKnockbackable>();
+			IKnockbackable knockbackable = collider.GetComponent<IKnockbackable>();
 
-		// 	if (knockbackable != null) {
-		// 		knockbackable.Knockback(entity.enemyData.knockbackAngle, entity.enemyData.knockbackStrength, Movement.FacingDirection);
-		// 	}
+			if (knockbackable != null)
+			{
+				knockbackable.Knockback(entity.enemyData.knockbackAngle, entity.enemyData.knockbackStrength, entity.Core.Movement.FacingDirection);
+			}
 		}
 	}
 }

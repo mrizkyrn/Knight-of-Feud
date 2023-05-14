@@ -1,34 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Stats : CoreComponent
 {
+    public event Action OnHealthZero;
+
     [SerializeField] private float maxHealth;
-    private float currentHealth;
+    [SerializeField] private int level;
+
+    public float CurrentHealth {get; private set;}
 
     protected override void Awake()
     {
         base.Awake();
 
-        currentHealth = maxHealth;
+        maxHealth += (level * 20);
+        CurrentHealth = maxHealth;
     }
 
     public void DecreaseHealth(float amount)
     {
-        currentHealth -= amount;
+        CurrentHealth -= amount;
 
-        if(currentHealth <= 0)
+        if(CurrentHealth <= 0)
         {
-            currentHealth = 0;
-            
-            Debug.Log("Health is zero!!");
+            CurrentHealth = 0;
+
+            OnHealthZero?.Invoke();
         }
     }
 
     public void IncreaseHealth(float amount)
     {
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, maxHealth);
     }
     
 }

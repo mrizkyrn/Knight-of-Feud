@@ -20,7 +20,7 @@ public class PlayerAttackState : PlayerAbilityState
 
         player.InputHandler.UseAttackInput();
         lastAttackTime = Time.time;
-        attackCount = 0;
+        // attackCount = 0;
         
         player.Anim.SetTrigger("attack1");
     }
@@ -43,6 +43,11 @@ public class PlayerAttackState : PlayerAbilityState
 
         if (!isExitingState)
         {
+            if (isGrounded && core.Movement.CurrentVelocity.x != 0)
+            {
+                core.Movement.SetVelocityZero();
+            }
+
             if (attackInput)
             {
                 player.InputHandler.UseAttackInput();
@@ -61,6 +66,7 @@ public class PlayerAttackState : PlayerAbilityState
 
             if (Time.time >= lastAttackTime + playerData.comboDelay)
             {
+                attackCount = 0;
                 isAbilityDone = true;
                 CanAttack = false;
             }

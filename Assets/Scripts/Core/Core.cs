@@ -28,10 +28,24 @@ public class Core : MonoBehaviour
         private set => stats = value;
     }
 
+    public ParticleManager ParticleManager
+    {
+        get => GenericNotImplementedError<ParticleManager>.TryGet(particleManager, transform.parent.name);
+        private set => particleManager = value;
+    }
+
+    public Death Death
+    {
+        get => GenericNotImplementedError<Death>.TryGet(death, transform.parent.name);
+        private set => death = value;
+    }
+
     private Movement movement;
     private CollisionSenses collisionSenses;
     private Combat combat;
     private Stats stats;
+    private ParticleManager particleManager;
+    private Death death;
 
     private void Awake()
     {
@@ -39,10 +53,13 @@ public class Core : MonoBehaviour
         CollisionSenses = GetComponentInChildren<CollisionSenses>();
         Combat = GetComponentInChildren<Combat>();
         Stats = GetComponentInChildren<Stats>();
+        ParticleManager = GetComponentInChildren<ParticleManager>();
+        death = GetComponentInChildren<Death>();
     }
 
     public void LogicUpdate()
     {
         Movement.LogicUpdate();
+        Combat.LogicUpdate();
     }
 }

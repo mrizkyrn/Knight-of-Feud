@@ -29,20 +29,13 @@ public class E1_ChargeState : EnemyChargeState
         {
             entity.StateMachine.ChangeState(enemy.MeleeAttackState);
         }
+        else if (!isLedged && isPlayerInMinAgroRange)
+        {
+            entity.StateMachine.ChangeState(enemy.IdleState);
+        }
         else if (!isLedged || isWalled || !isPlayerInMinAgroRange)
         {
             entity.StateMachine.ChangeState(enemy.LookForPlayerState);
-        }
-        else if (isChargeTimeOver)
-        {
-            if (isPlayerInMinAgroRange)
-            {
-                entity.StateMachine.ChangeState(enemy.PlayerDetectedState);
-            }
-            else
-            {
-                entity.StateMachine.ChangeState(enemy.LookForPlayerState);
-            }
         }
     }
 

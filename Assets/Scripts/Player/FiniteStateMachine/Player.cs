@@ -26,10 +26,13 @@ public class Player : MonoBehaviour
     public Core Core { get; private set; }
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
-    [SerializeField] TMP_Text fpsText;
+    [SerializeField] public Transform attackPoint;
+    [SerializeField] public TMP_Text fpsText;
     #endregion
 
     #region Other Variables
+    public bool IsAlive { get; private set; }
+
     private int lastFrameIndex;
     private float[] frameDeltatimeArray;
     #endregion
@@ -52,6 +55,7 @@ public class Player : MonoBehaviour
         AttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
         ShieldState = new PlayerShieldState(this, StateMachine, playerData, "shield");
 
+        IsAlive = true;
         frameDeltatimeArray = new float[50];
     }
 
@@ -61,6 +65,8 @@ public class Player : MonoBehaviour
         InputHandler = GetComponent<PlayerInputHandler>();
 
         StateMachine.Initialize(IdleState);
+
+        Core.Stats.OnHealthZero += Death;
     }
 
     private void Update()
@@ -73,7 +79,6 @@ public class Player : MonoBehaviour
         lastFrameIndex = (lastFrameIndex + 1) % frameDeltatimeArray.Length;
 
         fpsText.text = "fps: " + Mathf.RoundToInt(CalculateFPS()).ToString();
-        // Debug.Log(CheckIfGrounded());
     }
 
     private void FixedUpdate()
@@ -104,12 +109,50 @@ public class Player : MonoBehaviour
 
     private void MovementStartTrigger()
     {
-        Core.Movement.SetVelocityX(playerData.movementAttack[AttackState.attackCount] * Core.Movement.FacingDirection);
+        // Core.Movement.SetVelocityX(playerData.movementAttack[AttackState.attackCount] * Core.Movement.FacingDirection);
     }
 
     private void MovementStopTrigger()
     {
-        Core.Movement.SetVelocityZero();
+        // Core.Movement.SetVelocityZero();
+    }
+
+    public void RemoveGameObject()
+    {
+        transform.gameObject.SetActive(false);
+    }
+
+    private void Death()
+    {
+        IsAlive = false;
+        InputHandler.OnDisable();
+    }
+
+    private void AttackTrigger()
+    {
+        Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackPoint.position, playerData.attackRange, playerData.enemyLayerMask);
+
+		foreach (Collider2D collider in detectedObjects) 
+        {
+			IDamageable damageable = collider.GetComponent<IDamageable>();
+
+			if (damageable != null)
+            {
+				damageable.Damage(playerData.attackDamage);
+			}
+
+			IKnockbackable knockbackable = collider.GetComponent<IKnockbackable>();
+
+			if (knockbackable != null)
+			{
+				knockbackable.Knockback(playerData.knockbackAngle, playerData.knockbackStrength, Core.Movement.FacingDirection);
+			}
+		}
+    }
+
+    private void OnDisable()
+    {
+        Core.Stats.OnHealthZero -= Death;
     }
 
     private float CalculateFPS()
@@ -122,5 +165,9 @@ public class Player : MonoBehaviour
 
         return frameDeltatimeArray.Length / total;
     }
-
+    
+    public void OnDrawGizmos()
+    {  
+        Gizmos.DrawWireSphere(attackPoint.position, playerData.attackRange);
+    }
 }

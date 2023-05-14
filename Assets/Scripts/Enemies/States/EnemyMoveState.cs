@@ -15,6 +15,7 @@ public class EnemyMoveState : EnemyState
     public override void Enter()
     {
         base.Enter();
+
         entity.Core.Movement.SetVelocityX(entity.enemyData.movementVelocity * entity.Core.Movement.FacingDirection);
     }
 
@@ -26,6 +27,11 @@ public class EnemyMoveState : EnemyState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if (entity.Core.Movement.CurrentVelocity.x != entity.enemyData.movementVelocity * entity.Core.Movement.FacingDirection)
+		{
+			entity.Core.Movement.SetVelocityX(entity.enemyData.movementVelocity * entity.Core.Movement.FacingDirection);
+		}
     }
 
     public override void PhysicsUpdate()

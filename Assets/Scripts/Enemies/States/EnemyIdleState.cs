@@ -7,6 +7,7 @@ public class EnemyIdleState : EnemyState
     protected bool flipAfterIdle;
     protected bool isIdleTimeOver;
     protected bool isPlayerInMinAgroRange;
+    protected bool isLedged;
 
     protected float idleTime;
 
@@ -37,6 +38,11 @@ public class EnemyIdleState : EnemyState
     {
         base.LogicUpdate();
 
+        if (entity.Core.Movement.CurrentVelocity.x != 0f)
+		{
+			entity.Core.Movement?.SetVelocityZero();
+		}
+
         if(Time.time >= startTime + idleTime)
         {
             isIdleTimeOver = true;
@@ -52,6 +58,7 @@ public class EnemyIdleState : EnemyState
     {
         base.DoChecks();
 		isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
+        isLedged = entity.Core.CollisionSenses.CheckIfLedged();
     }
     
     public void SetFlipAfterIdle(bool flip)

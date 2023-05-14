@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-	private Movement movement;
+    private Player player;
 
     public EnemyStateMachine StateMachine { get; private set; }
     public EnemyData enemyData;
@@ -14,6 +14,8 @@ public class Entity : MonoBehaviour
     public AnimationToStateMachine Atsm { get; private set; }
 
     public int lastDamageDirection { get; private set; }
+
+    public bool IsAlive { get; private set; }
 
     [SerializeField] private Transform playerCheck;
 
@@ -28,6 +30,8 @@ public class Entity : MonoBehaviour
 
 	public virtual void Awake() 
     {
+        player = FindObjectOfType<Player>();
+
 		Core = GetComponentInChildren<Core>();
 
 		currentHealth = enemyData.maxHealth;
@@ -37,11 +41,24 @@ public class Entity : MonoBehaviour
         Atsm = GetComponent<AnimationToStateMachine>();
 
 		StateMachine = new EnemyStateMachine();
+
+        IsAlive = true;
 	}
+
+    public virtual void Start()
+    {
+        Debug.Log("ADD Death");
+        Core.Stats.OnHealthZero += Death;
+    }
 
     public virtual void Update() 
     {
-		StateMachine.CurrentState.LogicUpdate();
+        Core.LogicUpdate();
+
+        if (IsAlive)
+        {
+		    StateMachine.CurrentState.LogicUpdate();
+        }
 
 		if (Time.time >= lastDamageTime + enemyData.stunRecoveryTime) 
         {
@@ -56,7 +73,7 @@ public class Entity : MonoBehaviour
 
     public virtual bool CheckPlayerInMinAgroRange()
     {
-        return Physics2D.Raycast(playerCheck.position, transform.right, enemyData.minAgroDistance, enemyData.playerLayerMask);
+        return Physics2D.Raycast(playerCheck.position, transform.right, enemyData.minAgroDistance, enemyData.playerLayerMask) && player.IsAlive;
     }
 
     public virtual bool CheckPlayerInMaxAgroRange()
@@ -69,16 +86,29 @@ public class Entity : MonoBehaviour
         return Physics2D.Raycast(playerCheck.position, transform.right, enemyData.closeRangeActionDistance, enemyData.playerLayerMask);
     }
 
-    public virtual void DamageHop(float velocity)
-    {
-        velocityWorkspace.Set(Core.Movement.Rb.velocity.x, velocity);
-        Core.Movement.Rb.velocity = velocityWorkspace;
-    }
+    // public virtual void DamageHop(float velocity)
+    // {
+    //     velocityWorkspace.Set(Core.Movement.Rb.velocity.x, velocity);
+    //     Core.Movement.Rb.velocity = velocityWorkspace;
+    // }
 
     public virtual void ResetStunResistance()
     {
         isStunned = false;
         currentStunResistance = enemyData.stunResistance;
+    }
+
+    public virtual void OnDisable()
+    {
+        Debug.Log("REMOVE Death");
+
+        Core.Stats.OnHealthZero -= Death;
+    }
+
+    private void Death()
+    {
+        IsAlive = false;
+        Destroy(transform.gameObject, 5f);
     }
 
     public virtual void OnDrawGizmos()

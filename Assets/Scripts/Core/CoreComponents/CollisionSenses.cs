@@ -53,22 +53,22 @@ public class CollisionSenses : CoreComponent
         return Physics2D.Raycast(ledgeCheck.position, Vector2.down, ledgeCheckDistance, platformLayerMask);
     }
 
-    // private void OnDrawGizmos()
-    // {
-    //     if (core != null)
-    //     {
-    //         // Check Ground
+    private void OnDrawGizmos()
+    {
+        if (core != null)
+        {
+            // // Check Ground
             // Gizmos.color = CheckIfGrounded() ? Color.green : Color.red;
             // Gizmos.DrawWireCube(Col.bounds.center, size);
 
-    //         // Check Wall
-    //         Gizmos.color = CheckIfWalled() ? Color.green : Color.red;
-    //         Gizmos.DrawLine(Col.bounds.center, (Vector2)Col.bounds.center + direction * (Col.bounds.extents.x + wallCheckDistance));
+            // // Check Wall
+            // Gizmos.color = CheckIfWalled() ? Color.green : Color.red;
+            // Gizmos.DrawLine(Col.bounds.center, (Vector2)Col.bounds.center + direction * (Col.bounds.extents.x + wallCheckDistance));
 
-    //         // Check Ledge
-    //         Gizmos.color = CheckIfLedged() ? Color.green : Color.red;
-    //         Gizmos.DrawLine(ledgeCheck.position, (Vector2)ledgeCheck.position + Vector2.down * ledgeCheckDistance);
-    //     }
+            // Check Ledge
+            Gizmos.color = CheckIfLedged() ? Color.green : Color.red;
+            Gizmos.DrawLine(ledgeCheck.position, (Vector2)ledgeCheck.position + Vector2.down * ledgeCheckDistance);
+        }
 
-    // }
+    }
 }

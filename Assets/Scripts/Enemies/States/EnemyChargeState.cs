@@ -7,7 +7,6 @@ public class EnemyChargeState : EnemyState
 	protected bool isLedged;
 	protected bool isWalled;
     protected bool isPlayerInMinAgroRange;
-	protected bool isChargeTimeOver;
 	protected bool performCloseRangeAction;
 
     public EnemyChargeState(Entity entity, string animBoolName) : base(entity, animBoolName)
@@ -18,7 +17,6 @@ public class EnemyChargeState : EnemyState
     {
 		base.Enter();
 
-		isChargeTimeOver = false;
 		entity.Core.Movement?.SetVelocityX(entity.enemyData.chargeSpeed * entity.Core.Movement.FacingDirection);
 	}
 
@@ -31,10 +29,9 @@ public class EnemyChargeState : EnemyState
     {
 		base.LogicUpdate();
 
-		entity.Core.Movement?.SetVelocityX(entity.enemyData.chargeSpeed * entity.Core.Movement.FacingDirection);
-
-		if (Time.time >= startTime + entity.enemyData.chargeTime) {
-			isChargeTimeOver = true;
+		if (entity.Core.Movement.CurrentVelocity.x != entity.enemyData.chargeSpeed * entity.Core.Movement.FacingDirection)
+		{
+			entity.Core.Movement?.SetVelocityX(entity.enemyData.chargeSpeed * entity.Core.Movement.FacingDirection);
 		}
 	}
 
