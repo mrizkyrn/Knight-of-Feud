@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDataPersistence
 {
     #region State Variables
     public PlayerStateMachine StateMachine { get; private set; }
@@ -18,14 +18,17 @@ public class Player : MonoBehaviour
     public PlayerSlideState SlideState { get; private set; }
     public PlayerAttackState AttackState { get; private set; }
     public PlayerShieldState ShieldState { get; private set; }
-
-    [SerializeField] private PlayerData playerData;
     #endregion
 
     #region Components
+    [SerializeField] private PlayerData playerData;
+
+    private PlayerStats playerStats;
+
     public Core Core { get; private set; }
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
+    
     [SerializeField] public Transform attackPoint;
     [SerializeField] public TMP_Text fpsText;
     #endregion
@@ -63,6 +66,7 @@ public class Player : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
+        playerStats = GetComponent<PlayerStats>();
 
         StateMachine.Initialize(IdleState);
 
@@ -138,7 +142,7 @@ public class Player : MonoBehaviour
 
 			if (damageable != null)
             {
-				damageable.Damage(playerData.attackDamage);
+				damageable.Damage(playerStats.Damage.CurrentValue);
 			}
 
 			IKnockbackable knockbackable = collider.GetComponent<IKnockbackable>();
@@ -169,5 +173,15 @@ public class Player : MonoBehaviour
     public void OnDrawGizmos()
     {  
         Gizmos.DrawWireSphere(attackPoint.position, playerData.attackRange);
+    }
+
+    public void LoadData(GameData data)
+    {
+        
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -50,7 +50,6 @@ public class EnemyMeleeAttackState : EnemyAttackState
 
 			if (damageable != null) 
             {
-				Debug.Log(collider.gameObject.transform.parent.parent.name);
 				damageable.Damage(entity.enemyData.meleeAttackDamage);
 			}
 

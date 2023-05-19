@@ -61,5 +61,6 @@ public class Core : MonoBehaviour
     {
         Movement.LogicUpdate();
         Combat.LogicUpdate();
+        Stats.LogicUpdate();
     }
 }

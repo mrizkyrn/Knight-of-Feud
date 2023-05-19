@@ -208,6 +208,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""734852a7-0ff2-4c9b-893b-5a4cd4d3737e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Dekstop"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""09023436-c20b-45e2-b8e4-a0f47eec8b89"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
@@ -232,17 +243,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""devicePath"": ""<Mouse>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Mobile"",
-            ""bindingGroup"": ""Mobile"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Touchscreen>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -384,15 +384,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         {
             if (m_DekstopSchemeIndex == -1) m_DekstopSchemeIndex = asset.FindControlSchemeIndex("Dekstop");
             return asset.controlSchemes[m_DekstopSchemeIndex];
-        }
-    }
-    private int m_MobileSchemeIndex = -1;
-    public InputControlScheme MobileScheme
-    {
-        get
-        {
-            if (m_MobileSchemeIndex == -1) m_MobileSchemeIndex = asset.FindControlSchemeIndex("Mobile");
-            return asset.controlSchemes[m_MobileSchemeIndex];
         }
     }
     public interface IGameplayActions

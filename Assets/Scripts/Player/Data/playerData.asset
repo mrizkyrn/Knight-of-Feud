@@ -24,7 +24,7 @@ MonoBehaviour:
   maxHoldTime: 0.5
   slideCooldown: 0.5
   slideVelocity: 23
-  maxSlideDistance: 10
+  maxSlideDistance: 7
   maxSlideTime: 0.5
   slideDistanceMultiplier: 0.5
   attackRange: 0.8

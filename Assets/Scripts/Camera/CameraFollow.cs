@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 120;
     }
 
     private void LateUpdate()

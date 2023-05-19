@@ -1,21 +1,49 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Stats : CoreComponent
 {
     public event Action OnHealthZero;
 
     [SerializeField] private float maxHealth;
-    [SerializeField] private int level;
+
+    [SerializeField] private Image healthBarFill;
+    [SerializeField] private Canvas healthBar;
+
+    private Vector3 healtBarRotation;
 
     public float CurrentHealth {get; private set;}
 
     protected override void Awake()
     {
         base.Awake();
-
-        maxHealth += (level * 20);
+        
         CurrentHealth = maxHealth;
+
+        healtBarRotation = Vector3.zero;
+
+        if (healthBar != null)
+            healthBar.gameObject.SetActive(false);
+    }
+
+    public void LogicUpdate()
+    {
+        if (healthBarFill != null)
+            healthBarFill.fillAmount = CurrentHealth/maxHealth;
+
+        if (healthBar != null)
+        {
+            if (CurrentHealth != maxHealth && !healthBar.gameObject.activeSelf)
+                healthBar.gameObject.SetActive(true);
+        }
+        
+    }
+
+    public void LateUpdate()
+    {
+        if (healthBar != null)
+            healthBar.transform.rotation = Quaternion.identity;
     }
 
     public void DecreaseHealth(float amount)
@@ -26,6 +54,9 @@ public class Stats : CoreComponent
         {
             CurrentHealth = 0;
 
+            if(healthBar != null)
+                Destroy(healthBar);
+
             OnHealthZero?.Invoke();
         }
     }
@@ -34,5 +65,4 @@ public class Stats : CoreComponent
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, maxHealth);
     }
-    
 }
