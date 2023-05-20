@@ -51,7 +51,7 @@ public class PlayerJumpState : PlayerAbilityState
             {
                 stateMachine.ChangeState(player.AttackState);
             }
-            else if (shieldInput)
+            else if (shieldInput && player.playerStats.ShieldDurability.CurrentValue > 0)
             {
                 stateMachine.ChangeState(player.ShieldState);
             }

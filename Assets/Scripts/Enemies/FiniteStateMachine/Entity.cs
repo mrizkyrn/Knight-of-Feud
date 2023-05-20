@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    private Player player;
+    public Player player;
 
     public EnemyStateMachine StateMachine { get; private set; }
     public EnemyData enemyData;
@@ -47,7 +47,6 @@ public class Entity : MonoBehaviour
 
     public virtual void Start()
     {
-        Debug.Log("ADD Death");
         Core.Stats.OnHealthZero += Death;
     }
 
@@ -100,8 +99,6 @@ public class Entity : MonoBehaviour
 
     public virtual void OnDisable()
     {
-        Debug.Log("REMOVE Death");
-
         Core.Stats.OnHealthZero -= Death;
     }
 

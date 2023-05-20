@@ -30,6 +30,7 @@ public class EnemyData : ScriptableObject
 
     public Vector2 knockbackAngle = Vector2.one;
     public float knockbackStrength = 10f;
+    public float knockbackStrengthShield = 5f;
 
 
     [Header("Others")]

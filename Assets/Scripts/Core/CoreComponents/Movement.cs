@@ -50,7 +50,6 @@ public class Movement : CoreComponent
 
     public void SetVelocityY(float velocity)
     {
-        Debug.Log("Set velocity y : " + velocity);
         workspace.Set(CurrentVelocity.x, velocity);
         SetFinalVelocity();
     }

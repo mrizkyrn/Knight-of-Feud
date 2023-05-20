@@ -50,14 +50,23 @@ public class EnemyMeleeAttackState : EnemyAttackState
 
 			if (damageable != null) 
             {
-				damageable.Damage(entity.enemyData.meleeAttackDamage);
+				if (isPlayerShielding)
+				{
+					entity.player.playerStats.ShieldDurability.Decrease(entity.enemyData.meleeAttackDamage);
+				}
+				else
+				{
+					damageable.Damage(entity.enemyData.meleeAttackDamage);
+				}
 			}
 
 			IKnockbackable knockbackable = collider.GetComponent<IKnockbackable>();
 
 			if (knockbackable != null)
 			{
-				knockbackable.Knockback(entity.enemyData.knockbackAngle, entity.enemyData.knockbackStrength, entity.Core.Movement.FacingDirection);
+				float knockbackStrength = isPlayerShielding ? entity.enemyData.knockbackStrengthShield : entity.enemyData.knockbackStrength;
+
+				knockbackable.Knockback(entity.enemyData.knockbackAngle, knockbackStrength, entity.Core.Movement.FacingDirection);
 			}
 		}
 	}

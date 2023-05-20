@@ -636,7 +636,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 0bc16f773c0788443a92ee9b5eb86db5, type: 3}
   - {fileID: 21300000, guid: 86c281e84222063409136fff682d2d4c, type: 3}
   - {fileID: 21300000, guid: 4b5de8f99bfa8a5468f3fa0a723fe92f, type: 3}
-  - {fileID: 21300000, guid: 72c1719c3ddd8b143bc3ad42b8431643, type: 3}
+  - {fileID: 865555587, guid: 72c1719c3ddd8b143bc3ad42b8431643, type: 3}
+  - {fileID: -7334608, guid: 72c1719c3ddd8b143bc3ad42b8431643, type: 3}
+  - {fileID: -1379052414, guid: 72c1719c3ddd8b143bc3ad42b8431643, type: 3}
+  - {fileID: -343411737, guid: 72c1719c3ddd8b143bc3ad42b8431643, type: 3}
+  - {fileID: 1707381778, guid: 72c1719c3ddd8b143bc3ad42b8431643, type: 3}
+  - {fileID: -1887193216, guid: 72c1719c3ddd8b143bc3ad42b8431643, type: 3}
   - {fileID: 21300000, guid: 972ed59ca0883cd428dccaaf85ad23f6, type: 3}
   - {fileID: 21300000, guid: 8140ac5fde7ad7c46a3578bbd9367c3f, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -1225,7 +1230,12 @@ SpriteAtlas:
   - shop
   - grass_2
   - fence_1
-  - shop_anim
+  - shop_anim_4
+  - shop_anim_5
+  - shop_anim_0
+  - shop_anim_1
+  - shop_anim_2
+  - shop_anim_3
   - sign
   - fence_2
   m_RenderDataMap: {}

@@ -34,7 +34,7 @@ public class Stats : CoreComponent
 
         if (healthBar != null)
         {
-            if (CurrentHealth != maxHealth && !healthBar.gameObject.activeSelf)
+            if (CurrentHealth < maxHealth && CurrentHealth > 0 && !healthBar.gameObject.activeSelf)
                 healthBar.gameObject.SetActive(true);
         }
         
@@ -55,7 +55,7 @@ public class Stats : CoreComponent
             CurrentHealth = 0;
 
             if(healthBar != null)
-                Destroy(healthBar);
+                healthBar.gameObject.SetActive(false);
 
             OnHealthZero?.Invoke();
         }

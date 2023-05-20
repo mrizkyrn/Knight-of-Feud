@@ -8,6 +8,7 @@ public class EnemyAttackState : EnemyState
 
     protected bool isAnimationFinished;
 	protected bool isPlayerInMinAgroRange;
+	protected bool isPlayerShielding;
 
     public EnemyAttackState(Entity entity, string animBoolName, Transform attackPosition) : base(entity, animBoolName)
     {
@@ -43,6 +44,7 @@ public class EnemyAttackState : EnemyState
 		base.DoChecks();
 
 		isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
+		isPlayerShielding = entity.player.IsShielding && entity.Core.Movement.FacingDirection != entity.player.Core.Movement.FacingDirection;
 	}
 
     public virtual void TriggerAttack() {

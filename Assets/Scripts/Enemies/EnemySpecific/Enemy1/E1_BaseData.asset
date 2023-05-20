@@ -24,11 +24,9 @@ MonoBehaviour:
   meleeAttackDamage: 10
   knockbackAngle: {x: 1, y: 1}
   knockbackStrength: 10
+  knockbackStrengthShield: 7
   maxHealth: 30
   damageHopSpeed: 3
-  wallCheckDistance: 0.2
-  ledgeCheckDistance: 0.4
-  groundCheckRadius: 0.3
   minAgroDistance: 7
   maxAgroDistance: 12
   stunResistance: 3

@@ -13,11 +13,13 @@ public class PlayerShieldState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
+        player.IsShielding = true;
     }
 
     public override void Exit()
     {
         base.Exit();
+        player.IsShielding = false;
     }
 
     public override void LogicUpdate()
@@ -32,7 +34,7 @@ public class PlayerShieldState : PlayerAbilityState
             core.Movement.SetVelocityZero();
         }
 
-        if (!shieldInput)
+        if (!shieldInput || player.playerStats.ShieldDurability.CurrentValue <= 0)
         {
             isAbilityDone = true;
         }

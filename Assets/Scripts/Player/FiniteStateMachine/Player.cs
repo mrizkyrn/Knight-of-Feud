@@ -23,8 +23,7 @@ public class Player : MonoBehaviour, IDataPersistence
     #region Components
     [SerializeField] private PlayerData playerData;
 
-    private PlayerStats playerStats;
-
+    public PlayerStats playerStats { get; private set; }
     public Core Core { get; private set; }
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
@@ -35,6 +34,7 @@ public class Player : MonoBehaviour, IDataPersistence
 
     #region Other Variables
     public bool IsAlive { get; private set; }
+    public bool IsShielding { get; set; }
 
     private int lastFrameIndex;
     private float[] frameDeltatimeArray;

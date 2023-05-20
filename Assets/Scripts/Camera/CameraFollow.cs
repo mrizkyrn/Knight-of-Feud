@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Transform target;
 
     [SerializeField] private Vector3 offset;
-    [SerializeField] private float smoothSpeed = 0.125f;
+    [SerializeField] private float smoothSpeed = 8f;
 
     [SerializeField] private Vector2 minPosition;
     [SerializeField] private Vector2 maxPosition;
@@ -17,9 +17,9 @@ public class CameraFollow : MonoBehaviour
         Application.targetFrameRate = 120;
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-        Vector3 targetPosition = new Vector3(target.position.x, target.position.y, transform.position.z);
+        Vector3 targetPosition = new Vector3(target.position.x, target.position.y, transform.position.z) + offset;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
 
         // Clamp the camera position

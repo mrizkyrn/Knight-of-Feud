@@ -66,7 +66,7 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.SlideState);
         }
-        else if (shieldInput)
+        else if (shieldInput && player.playerStats.ShieldDurability.CurrentValue > 0)
         {
             stateMachine.ChangeState(player.ShieldState);
         }
