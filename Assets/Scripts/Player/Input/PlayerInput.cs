@@ -24,7 +24,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     ""name"": ""PlayerInput"",
     ""maps"": [
         {
-            ""name"": ""Gameplay"",
+            ""name"": ""PlayerControl"",
             ""id"": ""dd024ea4-499c-45e5-b0ac-00e7294f4a7f"",
             ""actions"": [
                 {
@@ -208,23 +208,68 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""734852a7-0ff2-4c9b-893b-5a4cd4d3737e"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Dekstop"",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""09023436-c20b-45e2-b8e4-a0f47eec8b89"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Dekstop"",
                     ""action"": ""Shield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""GameMenu"",
+            ""id"": ""bf2ee9c8-7569-451d-83c1-51b099e89eca"",
+            ""actions"": [
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""e6298354-241b-419c-a57d-fce1a7866383"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a791799c-4516-4690-9cb3-94ccff8d5733"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gameplay"",
+            ""id"": ""24ae9a23-a411-47f5-87e4-11367684c4b1"",
+            ""actions"": [
+                {
+                    ""name"": ""Open Chest"",
+                    ""type"": ""Button"",
+                    ""id"": ""cc20d370-03ce-4a15-aa74-3e6c40dc54d8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a2d692db-21ad-4d94-b521-8197116bf733"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Open Chest"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -250,13 +295,19 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         }
     ]
 }");
+        // PlayerControl
+        m_PlayerControl = asset.FindActionMap("PlayerControl", throwIfNotFound: true);
+        m_PlayerControl_Movement = m_PlayerControl.FindAction("Movement", throwIfNotFound: true);
+        m_PlayerControl_Jump = m_PlayerControl.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerControl_Slide = m_PlayerControl.FindAction("Slide", throwIfNotFound: true);
+        m_PlayerControl_Attack = m_PlayerControl.FindAction("Attack", throwIfNotFound: true);
+        m_PlayerControl_Shield = m_PlayerControl.FindAction("Shield", throwIfNotFound: true);
+        // GameMenu
+        m_GameMenu = asset.FindActionMap("GameMenu", throwIfNotFound: true);
+        m_GameMenu_Inventory = m_GameMenu.FindAction("Inventory", throwIfNotFound: true);
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
-        m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
-        m_Gameplay_Slide = m_Gameplay.FindAction("Slide", throwIfNotFound: true);
-        m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
-        m_Gameplay_Shield = m_Gameplay.FindAction("Shield", throwIfNotFound: true);
+        m_Gameplay_OpenChest = m_Gameplay.FindAction("Open Chest", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -313,49 +364,49 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Gameplay
-    private readonly InputActionMap m_Gameplay;
-    private IGameplayActions m_GameplayActionsCallbackInterface;
-    private readonly InputAction m_Gameplay_Movement;
-    private readonly InputAction m_Gameplay_Jump;
-    private readonly InputAction m_Gameplay_Slide;
-    private readonly InputAction m_Gameplay_Attack;
-    private readonly InputAction m_Gameplay_Shield;
-    public struct GameplayActions
+    // PlayerControl
+    private readonly InputActionMap m_PlayerControl;
+    private IPlayerControlActions m_PlayerControlActionsCallbackInterface;
+    private readonly InputAction m_PlayerControl_Movement;
+    private readonly InputAction m_PlayerControl_Jump;
+    private readonly InputAction m_PlayerControl_Slide;
+    private readonly InputAction m_PlayerControl_Attack;
+    private readonly InputAction m_PlayerControl_Shield;
+    public struct PlayerControlActions
     {
         private @PlayerInput m_Wrapper;
-        public GameplayActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
-        public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
-        public InputAction @Slide => m_Wrapper.m_Gameplay_Slide;
-        public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
-        public InputAction @Shield => m_Wrapper.m_Gameplay_Shield;
-        public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
+        public PlayerControlActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_PlayerControl_Movement;
+        public InputAction @Jump => m_Wrapper.m_PlayerControl_Jump;
+        public InputAction @Slide => m_Wrapper.m_PlayerControl_Slide;
+        public InputAction @Attack => m_Wrapper.m_PlayerControl_Attack;
+        public InputAction @Shield => m_Wrapper.m_PlayerControl_Shield;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GameplayActions set) { return set.Get(); }
-        public void SetCallbacks(IGameplayActions instance)
+        public static implicit operator InputActionMap(PlayerControlActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerControlActions instance)
         {
-            if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
+            if (m_Wrapper.m_PlayerControlActionsCallbackInterface != null)
             {
-                @Movement.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMovement;
-                @Jump.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
-                @Slide.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSlide;
-                @Slide.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSlide;
-                @Slide.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSlide;
-                @Attack.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
-                @Shield.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShield;
-                @Shield.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShield;
-                @Shield.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShield;
+                @Movement.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnMovement;
+                @Jump.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnJump;
+                @Slide.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnSlide;
+                @Slide.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnSlide;
+                @Slide.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnSlide;
+                @Attack.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAttack;
+                @Shield.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnShield;
+                @Shield.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnShield;
+                @Shield.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnShield;
             }
-            m_Wrapper.m_GameplayActionsCallbackInterface = instance;
+            m_Wrapper.m_PlayerControlActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Movement.started += instance.OnMovement;
@@ -376,6 +427,72 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
             }
         }
     }
+    public PlayerControlActions @PlayerControl => new PlayerControlActions(this);
+
+    // GameMenu
+    private readonly InputActionMap m_GameMenu;
+    private IGameMenuActions m_GameMenuActionsCallbackInterface;
+    private readonly InputAction m_GameMenu_Inventory;
+    public struct GameMenuActions
+    {
+        private @PlayerInput m_Wrapper;
+        public GameMenuActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Inventory => m_Wrapper.m_GameMenu_Inventory;
+        public InputActionMap Get() { return m_Wrapper.m_GameMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameMenuActions set) { return set.Get(); }
+        public void SetCallbacks(IGameMenuActions instance)
+        {
+            if (m_Wrapper.m_GameMenuActionsCallbackInterface != null)
+            {
+                @Inventory.started -= m_Wrapper.m_GameMenuActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_GameMenuActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_GameMenuActionsCallbackInterface.OnInventory;
+            }
+            m_Wrapper.m_GameMenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
+            }
+        }
+    }
+    public GameMenuActions @GameMenu => new GameMenuActions(this);
+
+    // Gameplay
+    private readonly InputActionMap m_Gameplay;
+    private IGameplayActions m_GameplayActionsCallbackInterface;
+    private readonly InputAction m_Gameplay_OpenChest;
+    public struct GameplayActions
+    {
+        private @PlayerInput m_Wrapper;
+        public GameplayActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @OpenChest => m_Wrapper.m_Gameplay_OpenChest;
+        public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameplayActions set) { return set.Get(); }
+        public void SetCallbacks(IGameplayActions instance)
+        {
+            if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
+            {
+                @OpenChest.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenChest;
+                @OpenChest.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenChest;
+                @OpenChest.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenChest;
+            }
+            m_Wrapper.m_GameplayActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @OpenChest.started += instance.OnOpenChest;
+                @OpenChest.performed += instance.OnOpenChest;
+                @OpenChest.canceled += instance.OnOpenChest;
+            }
+        }
+    }
     public GameplayActions @Gameplay => new GameplayActions(this);
     private int m_DekstopSchemeIndex = -1;
     public InputControlScheme DekstopScheme
@@ -386,12 +503,20 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_DekstopSchemeIndex];
         }
     }
-    public interface IGameplayActions
+    public interface IPlayerControlActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSlide(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnShield(InputAction.CallbackContext context);
+    }
+    public interface IGameMenuActions
+    {
+        void OnInventory(InputAction.CallbackContext context);
+    }
+    public interface IGameplayActions
+    {
+        void OnOpenChest(InputAction.CallbackContext context);
     }
 }

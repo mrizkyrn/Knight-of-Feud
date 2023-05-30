@@ -4,74 +4,87 @@ using UnityEngine;
 
 public class ChestController : MonoBehaviour
 {
-    [SerializeField] private PlayerStats playerStats;
-
     private Animator animator;
 
-    [SerializeField] private enum ChestType
-    {
-        Common,
-        Rare,
-        Epic
-    }
+    [SerializeField] private int minGold;
+    [SerializeField] private int maxGold;
+    [SerializeField] private List<Item> items;
 
-    private ChestType chestType;
-    private int minGold;
-    private int maxGold;
     private bool isOpened;
+    private bool isOnChestArea;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        isOpened = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
+    {
+        InputHandler.Instance.OnOpenChestPressed += OpenChest;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("OPEN CHest");
-            if (!isOpened && Input.GetMouseButton(0))
+            isOnChestArea = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isOnChestArea = false;
+        }
+    }
+
+    private void AddRandomGold()
+    {
+        int goldToAdd = Random.Range(minGold, maxGold + 1);
+
+        PlayerStats.Instance.Gold.Increase(goldToAdd);
+        Debug.Log("+ " + goldToAdd + " gold.");
+    }
+
+    private void AddRandomItem()
+    {
+        // Generate a random number between 0 and the total chance
+        float randomNumber = Random.Range(0f, 1f);
+
+        // Iterate through the items and check their chance to find the randomly selected item
+        foreach (Item item in items)
+        {
+            randomNumber = Random.Range(0f, 1f);
+
+            // If the random number is within the current chance range, add the item to the inventory
+            if (randomNumber <= item.chance)
             {
-                animator.SetBool("Open", true);
+                InventoryController.Instance.Add(item);
+                Debug.Log("+1 " + item.itemName);
             }
+        }
+    }
+
+    private void OnDisable()
+    {
+        InputHandler.Instance.OnOpenChestPressed -= OpenChest;
+    }
+
+    private void OpenChest()
+    {
+        if (isOnChestArea && !isOpened)
+        {
+            animator.SetTrigger("Open");
         }
     }
 
     public void Open()
     {
-        int goldToAdd = GenerateRandomGoldAmount();
-        playerStats.Gold.Increase(goldToAdd);
-        Debug.Log("Added " + goldToAdd + " gold to player's inventory.");
-        Debug.Log("Player gold now is " + playerStats.Gold.CurrentValue);
+        AddRandomGold();
+        AddRandomItem();
 
         isOpened = true;
-    }
-
-    private void SetChestType(ChestType type)
-    {
-        chestType = type;
-
-        // Set the min and max gold values based on the chest type
-        switch (chestType)
-        {
-            case ChestType.Common:
-                minGold = 10;
-                maxGold = 20;
-                break;
-            case ChestType.Rare:
-                minGold = 30;
-                maxGold = 50;
-                break;
-            case ChestType.Epic:
-                minGold = 60;
-                maxGold = 100;
-                break;
-        }
-    }
-
-    private int GenerateRandomGoldAmount()
-    {
-        int goldAmount = Random.Range(minGold, maxGold + 1);
-        return goldAmount;
     }
 }

@@ -45,41 +45,41 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnEnable()
     {
-        playerInput.Gameplay.Enable();
-        playerInput.Gameplay.Jump.started += OnJump;
-        playerInput.Gameplay.Jump.canceled += OnJump;
-        playerInput.Gameplay.Slide.started += OnSlide;
-        playerInput.Gameplay.Slide.canceled += OnSlide;
-        playerInput.Gameplay.Attack.started += OnAttack;
-        playerInput.Gameplay.Shield.started += OnShield;
-        playerInput.Gameplay.Shield.canceled += OnShield;
+        playerInput.PlayerControl.Enable();
+        playerInput.PlayerControl.Jump.started += OnJump;
+        playerInput.PlayerControl.Jump.canceled += OnJump;
+        playerInput.PlayerControl.Slide.started += OnSlide;
+        playerInput.PlayerControl.Slide.canceled += OnSlide;
+        playerInput.PlayerControl.Attack.started += OnAttack;
+        playerInput.PlayerControl.Shield.started += OnShield;
+        playerInput.PlayerControl.Shield.canceled += OnShield;
     }
 
     public void OnAttackEnable()
     {
-        playerInput.Gameplay.Attack.started += OnAttack;
+        playerInput.PlayerControl.Attack.started += OnAttack;
     }
 
     public void OnDisable()
     {
-        playerInput.Gameplay.Disable();
-        playerInput.Gameplay.Jump.started -= OnJump;
-        playerInput.Gameplay.Jump.canceled -= OnJump;
-        playerInput.Gameplay.Slide.started -= OnSlide;
-        playerInput.Gameplay.Slide.canceled -= OnSlide;
-        playerInput.Gameplay.Attack.started -= OnAttack;
-        playerInput.Gameplay.Shield.started -= OnShield;
-        playerInput.Gameplay.Shield.canceled -= OnShield;
+        playerInput.PlayerControl.Disable();
+        playerInput.PlayerControl.Jump.started -= OnJump;
+        playerInput.PlayerControl.Jump.canceled -= OnJump;
+        playerInput.PlayerControl.Slide.started -= OnSlide;
+        playerInput.PlayerControl.Slide.canceled -= OnSlide;
+        playerInput.PlayerControl.Attack.started -= OnAttack;
+        playerInput.PlayerControl.Shield.started -= OnShield;
+        playerInput.PlayerControl.Shield.canceled -= OnShield;
     }
 
     public void OnAttackDisable()
     {
-        playerInput.Gameplay.Attack.started -= OnAttack;
+        playerInput.PlayerControl.Attack.started -= OnAttack;
     }
 
     public void OnMove()
     {
-        MovementInput = playerInput.Gameplay.Movement.ReadValue<Vector2>();
+        MovementInput = playerInput.PlayerControl.Movement.ReadValue<Vector2>();
 
         NormInputX = Mathf.RoundToInt(MovementInput.x);
         NormInputY = Mathf.RoundToInt(MovementInput.y);

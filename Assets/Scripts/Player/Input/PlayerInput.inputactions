@@ -2,7 +2,7 @@
     "name": "PlayerInput",
     "maps": [
         {
-            "name": "Gameplay",
+            "name": "PlayerControl",
             "id": "dd024ea4-499c-45e5-b0ac-00e7294f4a7f",
             "actions": [
                 {
@@ -186,23 +186,68 @@
                 },
                 {
                     "name": "",
-                    "id": "734852a7-0ff2-4c9b-893b-5a4cd4d3737e",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Dekstop",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "09023436-c20b-45e2-b8e4-a0f47eec8b89",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Dekstop",
                     "action": "Shield",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "GameMenu",
+            "id": "bf2ee9c8-7569-451d-83c1-51b099e89eca",
+            "actions": [
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "e6298354-241b-419c-a57d-fce1a7866383",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a791799c-4516-4690-9cb3-94ccff8d5733",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Gameplay",
+            "id": "24ae9a23-a411-47f5-87e4-11367684c4b1",
+            "actions": [
+                {
+                    "name": "OpenChest",
+                    "type": "Button",
+                    "id": "cc20d370-03ce-4a15-aa74-3e6c40dc54d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a2d692db-21ad-4d94-b521-8197116bf733",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenChest",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
