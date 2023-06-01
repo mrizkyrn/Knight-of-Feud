@@ -15,10 +15,6 @@ public class PlayerStats : MonoBehaviour
 
     public int level;
 
-    public float maxHealth;
-    public float maxXP;
-    public float maxShiledDurablity;
-
     private void Awake()
     {
         if (Instance == null)
@@ -26,14 +22,11 @@ public class PlayerStats : MonoBehaviour
         else
             Destroy(gameObject);
     
-        Health.Init();
-        XP.Init();
-        Gold.Init();
-        Damage.Init();
-        ShieldDurability.Init();
-
-        maxXP = 100f;
-        maxShiledDurablity = ShieldDurability.BaseValue;
+        Health.Init(100);
+        XP.Init(100);
+        Gold.Init(999999);
+        Damage.Init(999999);
+        ShieldDurability.Init(50);
     }
 
     public void LevelUp()

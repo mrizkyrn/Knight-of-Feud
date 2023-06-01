@@ -9,6 +9,8 @@ public class Stat
 
     [field: SerializeField] public float BaseValue { get; private set; }
 
+    public float MaxValue { get; private set; }
+
     private float modifiedValue;
     private List<float> modifiers = new List<float>();
 
@@ -30,15 +32,20 @@ public class Stat
     
     private float currentValue;
 
-    public void Init()
+    public void Init(float maxValue)
     {
         CurrentValue = BaseValue;
+        this.MaxValue = maxValue;
         modifiedValue = BaseValue;
     }
 
     public void Increase(float amount) => CurrentValue += amount;
 
     public void Decrease(float amount) => CurrentValue -= amount;
+
+    public void IncreaseMaxValue(float amount) => MaxValue += amount;
+
+    public void DecreaseMaxValue(float amount) => MaxValue -= amount;
 
     public void AddModifier(float modifier)
     {

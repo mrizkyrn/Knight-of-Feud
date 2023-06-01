@@ -186,6 +186,17 @@
                 },
                 {
                     "name": "",
+                    "id": "0bca0963-e870-4236-9690-f886aa43e39c",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "09023436-c20b-45e2-b8e4-a0f47eec8b89",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",

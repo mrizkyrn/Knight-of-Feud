@@ -9,19 +9,21 @@ public class InventoryController : MonoBehaviour
 {
     public static InventoryController Instance { get; private set; }
 
-    [SerializeField] private GameObject itemPrefab;
+    [SerializeField] private GameObject itemSlotPrefab;
     [SerializeField] private Transform itemContent;
     [SerializeField] private TMP_Text itemName;
     [SerializeField] private TMP_Text itemDescription;
     [SerializeField] private Button useButton;
     [SerializeField] private Button dropButton;
+    [SerializeField] private int maxInventorySlot;
 
     private List<Item> items = new List<Item>();
+    private List<ItemSlot> slots = new List<ItemSlot>();
 
-    public event Action<ItemSlotController> OnItemSelected;
-    public event Action<ItemSlotController> OnItemDeselected;
+    public event Action<ItemSlot> OnItemSelected;
+    public event Action<ItemSlot> OnItemDeselected;
 
-    public ItemSlotController selectedItem;
+    public ItemSlot selectedItem;
 
     private void Awake()
     {
@@ -29,15 +31,53 @@ public class InventoryController : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
-        
-        itemName.text = "";
-        itemDescription.text = "";
     }
 
     private void Start()
     {
         useButton.onClick.AddListener(UseItem);
         dropButton.onClick.AddListener(DropItem);
+
+        SetData("", "");
+        InitSlots();
+    }
+
+  private void InitSlots()
+    {
+        for (int i = 0; i < maxInventorySlot; i++)
+        {
+            GameObject slotGO = Instantiate(itemSlotPrefab, itemContent);
+            ItemSlot slot = slotGO.GetComponent<ItemSlot>();
+            slots.Add(slot);
+        }
+    }
+
+    public void UpdateSlots()
+    {
+        ResetData();
+        for (int i = 0; i < slots.Count; i++)
+        {
+            var icon = slots[i].transform.Find("Image").GetComponent<Image>();
+
+            if (i < items.Count)
+            {
+                icon.sprite = items[i].icon;
+                slots[i].item = items[i];
+                icon.gameObject.SetActive(true);
+            }
+            else
+            {
+                icon.sprite = null;
+                slots[i].item = null;
+            }
+        }
+    }
+
+    public void ResetData()
+    {
+        foreach (ItemSlot slot in slots)
+            slot.Reset();
+        SetData("", "");
     }
 
     public void Add(Item item)
@@ -50,31 +90,13 @@ public class InventoryController : MonoBehaviour
         items.Remove(item);
     }
 
-    public void ItemList()
-    {
-        foreach (Transform item in itemContent)
-        {
-            Destroy(item.gameObject);
-        }
-        foreach (var item in items)
-        {
-            GameObject obj = Instantiate(itemPrefab, itemContent);
-
-            var icon = obj.transform.Find("Image").GetComponent<Image>();
-            var itemController = obj.GetComponent<ItemSlotController>();
-
-            icon.sprite = item.icon;
-            itemController.item = item;
-        }
-    }
-
     public void SetData(string name, string description)
     {
         itemName.text = name;
         itemDescription.text = description;
     }
 
-    public void SelectItem(ItemSlotController itemSlot)
+    public void SelectItem(ItemSlot itemSlot)
     {
         if (selectedItem == itemSlot)
         {
@@ -91,24 +113,22 @@ public class InventoryController : MonoBehaviour
 
     public void UseItem()
     {
-        if (selectedItem != null)
+        if (selectedItem.item != null)
         {
-            Item item = selectedItem.item;
             Debug.Log(PlayerStats.Instance.Health.CurrentValue);
-            PlayerStats.Instance.Health.Increase(10f);
+            selectedItem.Use();
             Debug.Log(PlayerStats.Instance.Health.CurrentValue);
-            items.Remove(item);
-            ItemList();
+            items.Remove(selectedItem.item);
+            UpdateSlots();
         }
     }
 
     public void DropItem()
     {
-        if (selectedItem != null)
+        if (selectedItem.item != null)
         {
-            Item item = selectedItem.item;
-            items.Remove(item);
-            ItemList();
+            items.Remove(selectedItem.item);
+            UpdateSlots();
         }
     }
 }

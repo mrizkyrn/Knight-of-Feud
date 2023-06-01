@@ -208,6 +208,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""0bca0963-e870-4236-9690-f886aa43e39c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""09023436-c20b-45e2-b8e4-a0f47eec8b89"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
@@ -252,7 +263,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
             ""id"": ""24ae9a23-a411-47f5-87e4-11367684c4b1"",
             ""actions"": [
                 {
-                    ""name"": ""Open Chest"",
+                    ""name"": ""OpenChest"",
                     ""type"": ""Button"",
                     ""id"": ""cc20d370-03ce-4a15-aa74-3e6c40dc54d8"",
                     ""expectedControlType"": ""Button"",
@@ -269,7 +280,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Open Chest"",
+                    ""action"": ""OpenChest"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -307,7 +318,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_GameMenu_Inventory = m_GameMenu.FindAction("Inventory", throwIfNotFound: true);
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_OpenChest = m_Gameplay.FindAction("Open Chest", throwIfNotFound: true);
+        m_Gameplay_OpenChest = m_Gameplay.FindAction("OpenChest", throwIfNotFound: true);
     }
 
     public void Dispose()

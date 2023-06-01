@@ -145,4 +145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a07e0c48bb36740ba978b406a51d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 0}
+  minGold: 50
+  maxGold: 100
+  itemChances:
+  - item: {fileID: 11400000, guid: a6a93b45b120b11479c9e823a28f5e6e, type: 2}
+    chance: 0.5
+  - item: {fileID: 11400000, guid: 15227cc6fed8f154db6a1e1cad15b53b, type: 2}
+    chance: 0.5
+  - item: {fileID: 11400000, guid: 40f7d2113d653ab4fafe1dc2d9d3499f, type: 2}
+    chance: 0.5

@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class ItemChance
+{
+    public Item item;
+    [Range(0f, 1f)]
+    public float chance;
+}
+
 public class ChestController : MonoBehaviour
 {
     private Animator animator;
 
     [SerializeField] private int minGold;
     [SerializeField] private int maxGold;
-    [SerializeField] private List<Item> items;
+    [SerializeField] private List<ItemChance> itemChances;
 
     private bool isOpened;
     private bool isOnChestArea;
@@ -54,15 +62,15 @@ public class ChestController : MonoBehaviour
         float randomNumber = Random.Range(0f, 1f);
 
         // Iterate through the items and check their chance to find the randomly selected item
-        foreach (Item item in items)
+        foreach (ItemChance itemChance in itemChances)
         {
             randomNumber = Random.Range(0f, 1f);
 
             // If the random number is within the current chance range, add the item to the inventory
-            if (randomNumber <= item.chance)
+            if (randomNumber <= itemChance.chance)
             {
-                InventoryController.Instance.Add(item);
-                Debug.Log("+1 " + item.itemName);
+                InventoryController.Instance.Add(itemChance.item);
+                Debug.Log("+1 " + itemChance.item.itemName);
             }
         }
     }

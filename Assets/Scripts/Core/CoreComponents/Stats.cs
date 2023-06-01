@@ -15,11 +15,16 @@ public class Stats : CoreComponent
 
     public float CurrentHealth {get; private set;}
 
+    private float healthPercent;
+    private bool isPlayer;
+
     protected override void Awake()
     {
         base.Awake();
         
-        CurrentHealth = maxHealth;
+        isPlayer = transform.parent.parent.CompareTag("Player");
+
+        CurrentHealth = isPlayer? PlayerStats.Instance.Health.MaxValue : maxHealth;
 
         healtBarRotation = Vector3.zero;
 
@@ -29,8 +34,9 @@ public class Stats : CoreComponent
 
     public void LogicUpdate()
     {
+        healthPercent = isPlayer? (PlayerStats.Instance.Health.CurrentValue/PlayerStats.Instance.Health.MaxValue) : CurrentHealth/maxHealth;
         if (healthBarFill != null)
-            healthBarFill.fillAmount = CurrentHealth/maxHealth;
+            healthBarFill.fillAmount = healthPercent;
 
         if (healthBar != null)
         {
@@ -48,21 +54,42 @@ public class Stats : CoreComponent
 
     public void DecreaseHealth(float amount)
     {
-        CurrentHealth -= amount;
-
-        if(CurrentHealth <= 0)
+        if (!isPlayer)
         {
-            CurrentHealth = 0;
+            CurrentHealth -= amount;
 
-            if(healthBar != null)
-                healthBar.gameObject.SetActive(false);
+            if(CurrentHealth <= 0)
+            {
+                CurrentHealth = 0;
 
-            OnHealthZero?.Invoke();
+                if(healthBar != null)
+                    healthBar.gameObject.SetActive(false);
+
+                OnHealthZero?.Invoke();
+            }
         }
+        else
+        {
+            PlayerStats.Instance.Health.Decrease(amount);
+            if(PlayerStats.Instance.Health.CurrentValue <= 0)
+            {
+                OnHealthZero?.Invoke();
+            }
+        }
+        
     }
 
     public void IncreaseHealth(float amount)
     {
-        CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, maxHealth);
+        if (!isPlayer)
+            CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, maxHealth);
+    }
+
+    public bool IsHealthZero(float amount)
+    {
+        if (isPlayer)
+            return PlayerStats.Instance.Health.CurrentValue - amount > 0;
+        else
+            return CurrentHealth - amount > 0;
     }
 }

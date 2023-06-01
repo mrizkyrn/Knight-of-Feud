@@ -4,10 +4,11 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     public ItemType itemType;
+    public Affect affect;
     public Sprite icon;
     public string itemName;
+    public int level;
     [TextArea] public string description;
-    public float chance;
 
     // Custom enum for item types
     public enum ItemType

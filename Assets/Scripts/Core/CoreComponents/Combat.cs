@@ -25,7 +25,7 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     {
         if(animator != null)
         {
-            if (core.Stats.CurrentHealth - amount > 0)
+            if (core.Stats.IsHealthZero(amount))
             {
                 animator.SetTrigger("TakeHit");
             }
