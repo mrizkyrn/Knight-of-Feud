@@ -9,13 +9,18 @@ public class InventoryController : MonoBehaviour
 {
     public static InventoryController Instance { get; private set; }
 
+    [SerializeField] private int maxInventorySlot;
+
     [SerializeField] private GameObject itemSlotPrefab;
     [SerializeField] private Transform itemContent;
     [SerializeField] private TMP_Text itemName;
     [SerializeField] private TMP_Text itemDescription;
+
     [SerializeField] private Button useButton;
     [SerializeField] private Button dropButton;
-    [SerializeField] private int maxInventorySlot;
+    [SerializeField] private Button addShortcutButton;
+    
+    [SerializeField] private ShortcutController shortcutSlots;
 
     private List<Item> items = new List<Item>();
     private List<ItemSlot> slots = new List<ItemSlot>();
@@ -37,6 +42,7 @@ public class InventoryController : MonoBehaviour
     {
         useButton.onClick.AddListener(UseItem);
         dropButton.onClick.AddListener(DropItem);
+        addShortcutButton.onClick.AddListener(AddShorcut);
 
         SetData("", "");
         InitSlots();
@@ -129,6 +135,14 @@ public class InventoryController : MonoBehaviour
         {
             items.Remove(selectedItem.item);
             UpdateSlots();
+        }
+    }
+
+    public void AddShorcut()
+    {
+        if (selectedItem.item != null && selectedItem.item.itemType == Item.ItemType.Potion)
+        {
+            shortcutSlots.AddToShortcut(selectedItem.item);
         }
     }
 }

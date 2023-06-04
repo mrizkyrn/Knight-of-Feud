@@ -16,7 +16,10 @@ public class ChestController : MonoBehaviour
 
     [SerializeField] private int minGold;
     [SerializeField] private int maxGold;
+    [SerializeField] private GameObject openTextUI;
+    [SerializeField] private Sprite coinImage;
     [SerializeField] private List<ItemChance> itemChances;
+    [SerializeField] private CollectedItem UI;
 
     private bool isOpened;
     private bool isOnChestArea;
@@ -30,6 +33,7 @@ public class ChestController : MonoBehaviour
     private void Start()
     {
         InputHandler.Instance.OnOpenChestPressed += OpenChest;
+        openTextUI.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -37,6 +41,7 @@ public class ChestController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isOnChestArea = true;
+            openTextUI.SetActive(true);
         }
     }
 
@@ -45,6 +50,7 @@ public class ChestController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isOnChestArea = false;
+            openTextUI.SetActive(false);
         }
     }
 
@@ -54,6 +60,8 @@ public class ChestController : MonoBehaviour
 
         PlayerStats.Instance.Gold.Increase(goldToAdd);
         Debug.Log("+ " + goldToAdd + " gold.");
+
+        UI.SetCollectItemUI(coinImage, "Gold", goldToAdd.ToString());
     }
 
     private void AddRandomItem()
@@ -71,6 +79,8 @@ public class ChestController : MonoBehaviour
             {
                 InventoryController.Instance.Add(itemChance.item);
                 Debug.Log("+1 " + itemChance.item.itemName);
+
+                UI.SetCollectItemUI(itemChance.item.icon, itemChance.item.itemName, "1");
             }
         }
     }

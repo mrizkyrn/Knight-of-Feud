@@ -5,8 +5,8 @@ using UnityEngine.EventSystems;
 
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] GameObject borderImage;
-    [SerializeField] GameObject image;
+    [SerializeField] private GameObject borderImage;
+    [SerializeField] private GameObject image;
 
     public Item item;
 

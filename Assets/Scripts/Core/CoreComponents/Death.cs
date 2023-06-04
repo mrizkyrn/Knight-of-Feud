@@ -13,6 +13,12 @@ public class Death : CoreComponent
 
     public void Die()
     {
+        if (!transform.parent.parent.CompareTag("Player"))
+        {
+            PlayerStats.Instance.IncreaseXP(core.Stats.getXP);
+            PlayerStats.Instance.Gold.Increase(core.Stats.getGold);
+        }
+
         foreach (var particle in deathParticles)
         {
             core.ParticleManager.StartParticles(particle);

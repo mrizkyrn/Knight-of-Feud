@@ -21,7 +21,7 @@ public class Stat
         get => currentValue;
         private set
         {
-            currentValue = Mathf.Clamp(value, 0f, 1000);
+            currentValue = Mathf.Clamp(value, 0f, MaxValue);
 
             if (currentValue <= 0f)
             {
@@ -29,13 +29,14 @@ public class Stat
             }
         }
     }
-    
+
     private float currentValue;
 
     public void Init(float maxValue)
     {
+        MaxValue = maxValue;
+        
         CurrentValue = BaseValue;
-        this.MaxValue = maxValue;
         modifiedValue = BaseValue;
     }
 
@@ -46,6 +47,8 @@ public class Stat
     public void IncreaseMaxValue(float amount) => MaxValue += amount;
 
     public void DecreaseMaxValue(float amount) => MaxValue -= amount;
+
+    public void SetZero() => CurrentValue = 0f;
 
     public void AddModifier(float modifier)
     {

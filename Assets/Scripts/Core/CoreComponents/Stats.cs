@@ -7,6 +7,8 @@ public class Stats : CoreComponent
     public event Action OnHealthZero;
 
     [SerializeField] private float maxHealth;
+    public float getXP;
+    public float getGold;
 
     [SerializeField] private Image healthBarFill;
     [SerializeField] private Canvas healthBar;

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   affect: 0
-  icon: {fileID: 21300000, guid: 28429d4e60108f744a455d91b3f2a552, type: 3}
+  icon: {fileID: 21300000, guid: ff3a11cb7d5d73947b318950e58ef9b2, type: 3}
   itemName: Lv1 Health Potion
   level: 1
   description: Increase HP by 25% of max HP

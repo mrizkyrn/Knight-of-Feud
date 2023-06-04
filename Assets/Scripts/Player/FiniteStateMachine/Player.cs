@@ -142,6 +142,7 @@ public class Player : MonoBehaviour, IDataPersistence
 
 			if (damageable != null)
             {
+                Debug.Log(playerStats.Damage.CurrentValue);
 				damageable.Damage(playerStats.Damage.CurrentValue);
 			}
 
