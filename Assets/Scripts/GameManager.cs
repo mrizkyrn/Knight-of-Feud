@@ -32,7 +32,9 @@ public class GameManager : MonoBehaviour
 
     private void OpenCharacterMenu()
     {
-        InventoryController.Instance.UpdateSlots();
+        if (!characterSheetMenu.activeSelf)
+            InventoryMenu.Instance.UpdateSlots();
+            
         characterSheetMenu.SetActive(!characterSheetMenu.activeSelf);
     }
 }

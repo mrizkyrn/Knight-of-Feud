@@ -5,11 +5,9 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 
-public class InventoryController : MonoBehaviour
+public class InventoryMenu : MonoBehaviour
 {
-    public static InventoryController Instance { get; private set; }
-
-    [SerializeField] private int maxInventorySlot;
+    public static InventoryMenu Instance { get; private set; }
 
     [SerializeField] private GameObject itemSlotPrefab;
     [SerializeField] private Transform itemContent;
@@ -20,9 +18,9 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private Button dropButton;
     [SerializeField] private Button addShortcutButton;
     
-    [SerializeField] private ShortcutController shortcutSlots;
+    public ShortcutController shortcutSlots;
 
-    private List<Item> items = new List<Item>();
+    // private List<Item> items = new List<Item>();
     private List<ItemSlot> slots = new List<ItemSlot>();
 
     public event Action<ItemSlot> OnItemSelected;
@@ -36,6 +34,8 @@ public class InventoryController : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+
+        InitSlots();
     }
 
     private void Start()
@@ -45,12 +45,12 @@ public class InventoryController : MonoBehaviour
         addShortcutButton.onClick.AddListener(AddShorcut);
 
         SetData("", "");
-        InitSlots();
+        
     }
 
-  private void InitSlots()
+    private void InitSlots()
     {
-        for (int i = 0; i < maxInventorySlot; i++)
+        for (int i = 0; i < InventoryManager.Instance.maxInventorySlot; i++)
         {
             GameObject slotGO = Instantiate(itemSlotPrefab, itemContent);
             ItemSlot slot = slotGO.GetComponent<ItemSlot>();
@@ -61,14 +61,15 @@ public class InventoryController : MonoBehaviour
     public void UpdateSlots()
     {
         ResetData();
+
         for (int i = 0; i < slots.Count; i++)
         {
             var icon = slots[i].transform.Find("Image").GetComponent<Image>();
 
-            if (i < items.Count)
+            if (i < InventoryManager.Instance.inventoryItems.Count)
             {
-                icon.sprite = items[i].icon;
-                slots[i].item = items[i];
+                icon.sprite = InventoryManager.Instance.inventoryItems[i].icon;
+                slots[i].item = InventoryManager.Instance.inventoryItems[i];
                 icon.gameObject.SetActive(true);
             }
             else
@@ -77,6 +78,8 @@ public class InventoryController : MonoBehaviour
                 slots[i].item = null;
             }
         }
+
+        // InventoryManager.Instance?.ShortcutUpdate();
     }
 
     public void ResetData()
@@ -86,15 +89,15 @@ public class InventoryController : MonoBehaviour
         SetData("", "");
     }
 
-    public void Add(Item item)
-    {
-        items.Add(item);
-    }
+    // public void Add(Item item)
+    // {
+    //     items.Add(item);
+    // }
 
-    public void Remove(Item item)
-    {
-        items.Remove(item);
-    }
+    // public void Remove(Item item)
+    // {
+    //     items.Remove(item);
+    // }
 
     public void SetData(string name, string description)
     {
@@ -121,10 +124,8 @@ public class InventoryController : MonoBehaviour
     {
         if (selectedItem.item != null)
         {
-            Debug.Log(PlayerStats.Instance.Health.CurrentValue);
-            selectedItem.Use();
-            Debug.Log(PlayerStats.Instance.Health.CurrentValue);
-            items.Remove(selectedItem.item);
+            selectedItem.item.PerformEffect();
+            InventoryManager.Instance.inventoryItems.Remove(selectedItem.item);
             UpdateSlots();
         }
     }
@@ -133,7 +134,7 @@ public class InventoryController : MonoBehaviour
     {
         if (selectedItem.item != null)
         {
-            items.Remove(selectedItem.item);
+            InventoryManager.Instance.inventoryItems.Remove(selectedItem.item);
             UpdateSlots();
         }
     }
@@ -142,7 +143,9 @@ public class InventoryController : MonoBehaviour
     {
         if (selectedItem.item != null && selectedItem.item.itemType == Item.ItemType.Potion)
         {
-            shortcutSlots.AddToShortcut(selectedItem.item);
+            InventoryManager.Instance.AddToShortcut(selectedItem.item);
         }
     }
+
+
 }

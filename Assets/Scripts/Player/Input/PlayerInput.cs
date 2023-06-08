@@ -270,6 +270,42 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use"",
+                    ""type"": ""Button"",
+                    ""id"": ""0597210f-0e25-46cf-bc23-ceb47e1fc32d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem1"",
+                    ""type"": ""Button"",
+                    ""id"": ""9933bc15-713a-4f4d-83f0-6c029465dea6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem2"",
+                    ""type"": ""Button"",
+                    ""id"": ""20708f63-862a-4aa8-9ca3-1c7a100c0cd6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem3"",
+                    ""type"": ""Button"",
+                    ""id"": ""9e302249-b3ff-46c7-9b49-ea43f97ef9c0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -281,6 +317,50 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""OpenChest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da39ca55-545a-4bdb-ac89-9d9a08655dbc"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c416571a-0c7b-4b30-9618-af3fa88e4a40"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47fa4a65-7f31-4da9-988f-9b755619afad"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a93bb5e-cdd7-4254-b050-f69f40c92749"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -319,6 +399,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_OpenChest = m_Gameplay.FindAction("OpenChest", throwIfNotFound: true);
+        m_Gameplay_Use = m_Gameplay.FindAction("Use", throwIfNotFound: true);
+        m_Gameplay_UseItem1 = m_Gameplay.FindAction("UseItem1", throwIfNotFound: true);
+        m_Gameplay_UseItem2 = m_Gameplay.FindAction("UseItem2", throwIfNotFound: true);
+        m_Gameplay_UseItem3 = m_Gameplay.FindAction("UseItem3", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -477,11 +561,19 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_OpenChest;
+    private readonly InputAction m_Gameplay_Use;
+    private readonly InputAction m_Gameplay_UseItem1;
+    private readonly InputAction m_Gameplay_UseItem2;
+    private readonly InputAction m_Gameplay_UseItem3;
     public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
         public GameplayActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @OpenChest => m_Wrapper.m_Gameplay_OpenChest;
+        public InputAction @Use => m_Wrapper.m_Gameplay_Use;
+        public InputAction @UseItem1 => m_Wrapper.m_Gameplay_UseItem1;
+        public InputAction @UseItem2 => m_Wrapper.m_Gameplay_UseItem2;
+        public InputAction @UseItem3 => m_Wrapper.m_Gameplay_UseItem3;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -494,6 +586,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @OpenChest.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenChest;
                 @OpenChest.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenChest;
                 @OpenChest.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenChest;
+                @Use.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUse;
+                @Use.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUse;
+                @Use.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUse;
+                @UseItem1.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUseItem1;
+                @UseItem1.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUseItem1;
+                @UseItem1.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUseItem1;
+                @UseItem2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUseItem2;
+                @UseItem2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUseItem2;
+                @UseItem2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUseItem2;
+                @UseItem3.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUseItem3;
+                @UseItem3.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUseItem3;
+                @UseItem3.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUseItem3;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -501,6 +605,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @OpenChest.started += instance.OnOpenChest;
                 @OpenChest.performed += instance.OnOpenChest;
                 @OpenChest.canceled += instance.OnOpenChest;
+                @Use.started += instance.OnUse;
+                @Use.performed += instance.OnUse;
+                @Use.canceled += instance.OnUse;
+                @UseItem1.started += instance.OnUseItem1;
+                @UseItem1.performed += instance.OnUseItem1;
+                @UseItem1.canceled += instance.OnUseItem1;
+                @UseItem2.started += instance.OnUseItem2;
+                @UseItem2.performed += instance.OnUseItem2;
+                @UseItem2.canceled += instance.OnUseItem2;
+                @UseItem3.started += instance.OnUseItem3;
+                @UseItem3.performed += instance.OnUseItem3;
+                @UseItem3.canceled += instance.OnUseItem3;
             }
         }
     }
@@ -529,5 +645,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     public interface IGameplayActions
     {
         void OnOpenChest(InputAction.CallbackContext context);
+        void OnUse(InputAction.CallbackContext context);
+        void OnUseItem1(InputAction.CallbackContext context);
+        void OnUseItem2(InputAction.CallbackContext context);
+        void OnUseItem3(InputAction.CallbackContext context);
     }
 }

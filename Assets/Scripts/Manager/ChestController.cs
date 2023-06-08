@@ -77,8 +77,7 @@ public class ChestController : MonoBehaviour
             // If the random number is within the current chance range, add the item to the inventory
             if (randomNumber <= itemChance.chance)
             {
-                InventoryController.Instance.Add(itemChance.item);
-                Debug.Log("+1 " + itemChance.item.itemName);
+                InventoryManager.Instance.AddItem(itemChance.item);
 
                 UI.SetCollectItemUI(itemChance.item.icon, itemChance.item.itemName, "1");
             }

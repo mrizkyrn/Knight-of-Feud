@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -18,19 +16,19 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     private void OnEnable()
     {
-        InventoryController.Instance.OnItemSelected += OnItemSelected;
-        InventoryController.Instance.OnItemDeselected += OnItemDeselected;
+        InventoryMenu.Instance.OnItemSelected += OnItemSelected;
+        InventoryMenu.Instance.OnItemDeselected += OnItemDeselected;
     }
 
     private void OnDisable()
     {
-        InventoryController.Instance.OnItemSelected -= OnItemSelected;
-        InventoryController.Instance.OnItemDeselected -= OnItemDeselected;
+        InventoryMenu.Instance.OnItemSelected -= OnItemSelected;
+        InventoryMenu.Instance.OnItemDeselected -= OnItemDeselected;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        InventoryController.Instance.SelectItem(this);
+        InventoryMenu.Instance.SelectItem(this);
     }
 
     private void OnItemSelected(ItemSlot selectedItem)
@@ -39,9 +37,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         {
             borderImage.SetActive(true);
             if (item != null)
-                InventoryController.Instance.SetData(item.itemName, item.description);
+                InventoryMenu.Instance.SetData(item.itemName, item.description);
             else
-                InventoryController.Instance.SetData("", "");
+                InventoryMenu.Instance.SetData("", "");
         }
         else
         {
@@ -54,7 +52,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         if (deselectedItem == this)
         {
             // The item is deselected, perform deselection visual changes
-            InventoryController.Instance.SetData("", "");
+            InventoryMenu.Instance.SetData("", "");
             borderImage.SetActive(false);
         }
     }
