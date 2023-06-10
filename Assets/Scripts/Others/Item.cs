@@ -9,8 +9,8 @@ public class Item : ScriptableObject
     public string itemName;
     public int level;
     [TextArea] public string description;
-    public float sellingPrice;
     public float buyingPrice;
+    public float damageWeapon;
 
     // Custom enum for item types
     public enum ItemType
@@ -26,24 +26,24 @@ public class Item : ScriptableObject
         Defense
     }
 
-    // Additional function to perform the item's effect
-    public void PerformEffect()
-    {
-        switch (itemType)
-        {
-            case ItemType.Potion:
-                UsePotion();
-                break;
-            case ItemType.Weapon:
-                UseWeapon();
-                break;
-            default:
-                Debug.LogError("Unknown item type");
-                break;
-        }
-    }
+    // // Additional function to perform the item's effect
+    // public void PerformEffect()
+    // {
+    //     switch (itemType)
+    //     {
+    //         case ItemType.Potion:
+    //             UsePotion();
+    //             break;
+    //         case ItemType.Weapon:
+    //             UseWeapon();
+    //             break;
+    //         default:
+    //             Debug.LogError("Unknown item type");
+    //             break;
+    //     }
+    // }
 
-    private void UsePotion()
+    public void UsePotion()
     {
         if (affect == Affect.Health)
         {
@@ -69,8 +69,9 @@ public class Item : ScriptableObject
         }
     }
 
-    private void UseWeapon()
-    {
-        // Perform weapon effect
-    }
+    // private void UseWeapon()
+    // {
+    //     // Perform weapon effect
+
+    // }
 }

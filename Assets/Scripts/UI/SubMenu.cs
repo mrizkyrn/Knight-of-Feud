@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SubMenu : MonoBehaviour
 {
-[SerializeField] private GameObject[] menuContents;
+    [SerializeField] private GameObject[] menuContents;
     [SerializeField] private Image[] menuImages;
     [SerializeField] private float buttonPressOpacity = 0f;
     [SerializeField] private float defaultOpacity = 1f;
@@ -18,6 +18,8 @@ public class SubMenu : MonoBehaviour
         {
             SetImageOpacity(menuImages[i], defaultOpacity);
         }
+        
+        SetImageOpacity(menuImages[0], buttonPressOpacity);
     }
 
     public void ActivateMenu(int index)

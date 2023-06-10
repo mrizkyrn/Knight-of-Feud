@@ -14,6 +14,7 @@ public class PlayerStats : MonoBehaviour
     [field: SerializeField] public Stat XP { get; private set; }
     [field: SerializeField] public Stat Gold { get; private set; }
     [field: SerializeField] public Stat Damage { get; private set; }
+    [field: SerializeField] public Stat Defense { get; private set; }
     [field: SerializeField] public Stat ShieldDurability { get; private set; }
 
     public event Action OnLevelUp;
@@ -31,18 +32,28 @@ public class PlayerStats : MonoBehaviour
         XP.Init(100);
         Gold.Init(999999);
         Damage.Init(999999);
+        Defense.Init(999999);
         ShieldDurability.Init(50);
     }
 
     public void LevelUp()
     {
         Debug.Log("LEVEL UP");
+        StatsUp();
         XP.IncreaseMaxValue(XP.MaxValue * 0.5f);
         XP.SetZero();
 
         Level++;
 
         OnLevelUp?.Invoke();
+    }
+
+    public void StatsUp()
+    {
+        Health.IncreaseMaxValue(50f);
+        Gold.Increase(100f);
+        Damage.Increase(50f);
+        Defense.Increase(5f);
     }
 
     public void IncreaseXP(float amount)

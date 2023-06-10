@@ -6,6 +6,7 @@ public class Shop : MonoBehaviour
 {
     [SerializeField] private GameObject UI;
     [SerializeField] private GameObject shopMenu;
+    [SerializeField] private ShopManager shopManager;
 
     private void Start()
     {
@@ -32,12 +33,14 @@ public class Shop : MonoBehaviour
     public void Open()
     {
         shopMenu.SetActive(true);
+        shopManager.SetSellContent();
         Time.timeScale = 0f;
     }
 
     public void Close()
     {
         shopMenu.SetActive(false);
+        shopManager.ResetSellContent();
         Time.timeScale = 1f;
     }
 }

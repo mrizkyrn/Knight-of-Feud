@@ -7,6 +7,7 @@ public class ShortcutBags : MonoBehaviour
     private ShortcutBag[] itemShortcutBags;
     
     [SerializeField] private GameObject shortcutBagPrefab;
+    [SerializeField] private AudioSource usePotionSound;
     
     public void Start()
     {
@@ -69,8 +70,8 @@ public class ShortcutBags : MonoBehaviour
     {
         if (itemShortcutBags[0].item != null)
         {
-            Debug.Log("ITEM 1 USED");
-            itemShortcutBags[0].item.PerformEffect();
+            usePotionSound.Play();
+            itemShortcutBags[0].item.UsePotion();
             InventoryManager.Instance.RemoveItem(itemShortcutBags[0].item);
         }
     }
@@ -78,8 +79,8 @@ public class ShortcutBags : MonoBehaviour
     {
         if (itemShortcutBags[1].item != null)
         {
-            Debug.Log("ITEM 2 USED");
-            itemShortcutBags[1].item.PerformEffect();
+            usePotionSound.Play();
+            itemShortcutBags[1].item.UsePotion();
             InventoryManager.Instance.RemoveItem(itemShortcutBags[1].item);
         }
     }
@@ -88,8 +89,8 @@ public class ShortcutBags : MonoBehaviour
     {
         if (itemShortcutBags[2].item != null)
         {
-            Debug.Log("ITEM 3 USED");
-            itemShortcutBags[2].item.PerformEffect();
+            usePotionSound.Play();
+            itemShortcutBags[2].item.UsePotion();
             InventoryManager.Instance.RemoveItem(itemShortcutBags[2].item);
         }
     }

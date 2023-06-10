@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject characterSheetMenu;
+    [SerializeField] private PlayerStatsUI playerStatsUI;
 
     private void Start()
     {
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0f;
             InventoryMenu.Instance.UpdateSlots();
+            playerStatsUI.SetStats();
         }
         else
         {

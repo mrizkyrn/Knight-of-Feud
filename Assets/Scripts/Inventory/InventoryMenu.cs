@@ -17,6 +17,8 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] private Button useButton;
     [SerializeField] private Button dropButton;
     [SerializeField] private Button addShortcutButton;
+
+    [SerializeField] private WeaponSlot weaponSlot;
     
     public ShortcutController shortcutSlots;
 
@@ -112,8 +114,20 @@ public class InventoryMenu : MonoBehaviour
     {
         if (selectedItem.item != null)
         {
-            selectedItem.item.PerformEffect();
-            InventoryManager.Instance.inventoryItems.Remove(selectedItem.item);
+            if (selectedItem.item.itemType == Item.ItemType.Potion)
+            {
+                selectedItem.item.UsePotion();
+                InventoryManager.Instance.inventoryItems.Remove(selectedItem.item);
+            }
+            else
+            {
+                Item weapon = weaponSlot.item;
+                Debug.Log(weapon.name);
+                weaponSlot.AddWeapon(selectedItem.item);
+
+                int index = InventoryManager.Instance.inventoryItems.IndexOf(selectedItem.item);
+                InventoryManager.Instance.inventoryItems[index] = weapon;
+            }
             UpdateSlots();
         }
     }

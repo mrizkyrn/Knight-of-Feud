@@ -12,7 +12,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Item[] potionItems;
     [SerializeField] private Transform weaponsContent;
     [SerializeField] private Item[] WeaponItems;
-    // [SerializeField] private Transform sellContent;
+    [SerializeField] private Transform sellContent;
 
     [SerializeField] private Image itemImage;
     [SerializeField] private TMP_Text nameTxt;
@@ -30,6 +30,7 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         weaponsContent.gameObject.SetActive(false);
+        sellContent.gameObject.SetActive(false);
 
         for (int i = 0; i < potionItems.Length; i++)
         {
@@ -51,9 +52,36 @@ public class ShopManager : MonoBehaviour
             icon.sprite = WeaponItems[i].icon;
         }
 
-        buyButton.onClick.AddListener(BuyItem);
+        buyButton.onClick.AddListener(BuyOrSellItem);
         itemImage.gameObject.SetActive(false);
         buyButton.gameObject.SetActive(false);
+    }
+
+    public void SetSellContent()
+    {
+        foreach (var item in InventoryManager.Instance.inventoryItems)
+        {
+            Debug.Log(item.name);
+            GameObject slotGO = Instantiate(itemShopSlotPrefab, sellContent);
+            ItemShopSlot itemShopSlot = slotGO.GetComponent<ItemShopSlot>();
+            itemShopSlot.item = item;
+
+            var icon = slotGO.transform.Find("Image").GetComponent<Image>();
+            icon.sprite = item.icon;
+        }
+    }
+
+    public void ResetSellContent()
+    {
+        // Get the transform component of the target object
+        Transform targetTransform = sellContent.transform;
+
+        // Iterate through all the children and destroy them
+        for (int i = targetTransform.childCount - 1; i >= 0; i--)
+        {
+            GameObject child = targetTransform.GetChild(i).gameObject;
+            Destroy(child);
+        }
     }
 
     public void SetDescription()
@@ -61,7 +89,7 @@ public class ShopManager : MonoBehaviour
         itemImage.sprite = selectedItem.item.icon;
         nameTxt.text = selectedItem.item.name;
         descTxt.text = selectedItem.item.description;
-        priceTxt.text = selectedItem.item.buyingPrice.ToString();
+        priceTxt.text = sellContent.gameObject.activeSelf ? (selectedItem.item.buyingPrice/2).ToString(): selectedItem.item.buyingPrice.ToString();
     }
 
     public void ResetDescription()
@@ -89,25 +117,51 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    private void BuyItem()
+    private void BuyOrSellItem()
     {
-        if (selectedItem != null)
+        if (selectedItem == null)
         {
-            if (PlayerStats.Instance.Gold.CurrentValue >= selectedItem.item.buyingPrice)
-            {
-                buySFX.Play();
-                InventoryManager.Instance.AddItem(selectedItem.item);
-                PlayerStats.Instance.Gold.Decrease(selectedItem.item.buyingPrice);
-                Debug.Log("Item berhasil dibeli");
-            }
-            else
-            {
-                Debug.Log("Not enough gold");
-            }
+            Debug.Log("Item tidak tersedia");
+            return;
+        }
+
+        bool isSelling = sellContent.gameObject.activeSelf;
+        float price = isSelling ? selectedItem.item.buyingPrice / 2 : selectedItem.item.buyingPrice;
+
+        if (isSelling)
+        {
+            SellItem(price);
         }
         else
         {
-            Debug.Log("Item tidak tersedia");
+            BuyItem(price);
+        }
+    }
+
+    private void SellItem(float price)
+    {
+        buySFX.Play();
+        PlayerStats.Instance.Gold.Increase(price);
+        InventoryManager.Instance.RemoveItem(selectedItem.item);
+        ResetSellContent();
+        SetSellContent();
+        Debug.Log("Item berhasil dijual");
+    }
+
+    private void BuyItem(float price)
+    {
+        if (PlayerStats.Instance.Gold.CurrentValue >= price)
+        {
+            buySFX.Play();
+            ResetSellContent();
+            SetSellContent();
+            InventoryManager.Instance.AddItem(selectedItem.item);
+            PlayerStats.Instance.Gold.Decrease(price);
+            Debug.Log("Item berhasil dibeli");
+        }
+        else
+        {
+            Debug.Log("Not enough gold");
         }
     }
 }
