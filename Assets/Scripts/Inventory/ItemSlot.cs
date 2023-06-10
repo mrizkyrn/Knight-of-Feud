@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -54,23 +56,6 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             // The item is deselected, perform deselection visual changes
             InventoryMenu.Instance.SetData("", "");
             borderImage.SetActive(false);
-        }
-    }
-
-    public void Use()
-    {
-        if (item.itemType == Item.ItemType.Potion)
-        {
-            if (item.affect == Item.Affect.Health)
-            {
-                switch (item.level)
-                {
-                    case 1: PlayerStats.Instance.Health.Increase(PlayerStats.Instance.Health.MaxValue * 0.25f); break;
-                    case 2: PlayerStats.Instance.Health.Increase(PlayerStats.Instance.Health.MaxValue * 0.50f); break;
-                    case 3: PlayerStats.Instance.Health.Increase(PlayerStats.Instance.Health.MaxValue * 1f); break;
-                    default: Debug.LogError("level item not assigned"); break;
-                }
-            }
         }
     }
 

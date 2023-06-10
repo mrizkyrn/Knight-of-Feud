@@ -34,8 +34,6 @@ public class InventoryMenu : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
-
-        InitSlots();
     }
 
     private void Start()
@@ -45,7 +43,7 @@ public class InventoryMenu : MonoBehaviour
         addShortcutButton.onClick.AddListener(AddShorcut);
 
         SetData("", "");
-        
+        InitSlots();
     }
 
     private void InitSlots()
@@ -88,16 +86,6 @@ public class InventoryMenu : MonoBehaviour
             slot.Reset();
         SetData("", "");
     }
-
-    // public void Add(Item item)
-    // {
-    //     items.Add(item);
-    // }
-
-    // public void Remove(Item item)
-    // {
-    //     items.Remove(item);
-    // }
 
     public void SetData(string name, string description)
     {

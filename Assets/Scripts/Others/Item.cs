@@ -9,6 +9,8 @@ public class Item : ScriptableObject
     public string itemName;
     public int level;
     [TextArea] public string description;
+    public float sellingPrice;
+    public float buyingPrice;
 
     // Custom enum for item types
     public enum ItemType

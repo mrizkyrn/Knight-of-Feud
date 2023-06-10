@@ -18,3 +18,5 @@ MonoBehaviour:
   itemName: Lv2 Health Potion
   level: 2
   description: Increase HP by 50% of max HP
+  sellingPrice: 5
+  buyingPrice: 10

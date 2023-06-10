@@ -5,20 +5,24 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject characterSheetMenu;
+    [SerializeField] private GameObject shopMenu;
 
     private void Start()
     {
         characterSheetMenu.SetActive(false);
     }
 
-    // private void Update()
-    // {
-    //     if (InputHandler.Instance != null)
-    //     {
-    //         InventoryController.Instance.ItemList();
-    //         characterSheetMenu.SetActive(InputHandler.Instance.isInventoryOpen);
-    //     }
-    // }
+    private void Update()
+    {
+        if (!shopMenu.activeSelf)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
 
     private void OnEnable()
     {
@@ -33,8 +37,15 @@ public class GameManager : MonoBehaviour
     private void OpenCharacterMenu()
     {
         if (!characterSheetMenu.activeSelf)
+        {
+            Time.timeScale = 0f;
             InventoryMenu.Instance.UpdateSlots();
-            
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+
         characterSheetMenu.SetActive(!characterSheetMenu.activeSelf);
     }
 }
