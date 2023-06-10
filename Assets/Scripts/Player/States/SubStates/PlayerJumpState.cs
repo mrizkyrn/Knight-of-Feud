@@ -20,6 +20,8 @@ public class PlayerJumpState : PlayerAbilityState
     {
         base.Enter();
 
+        player.PlaySoundEffect("Jump");
+
         player.Anim.SetBool("isGrounded", isGrounded);
 
         core.Movement.SetVelocityY(playerData.jumpVelocity);

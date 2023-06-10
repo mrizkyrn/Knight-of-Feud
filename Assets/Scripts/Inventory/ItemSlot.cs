@@ -7,6 +7,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private GameObject borderImage;
     [SerializeField] private GameObject image;
+    private AudioSource selectSound;
 
     public Item item;
 
@@ -14,6 +15,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     {
         borderImage.SetActive(false);
         image.SetActive(false);
+        selectSound = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -35,6 +37,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     private void OnItemSelected(ItemSlot selectedItem)
     {
+        selectSound.Play();
         if (selectedItem == this)
         {
             borderImage.SetActive(true);

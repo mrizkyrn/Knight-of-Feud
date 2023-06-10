@@ -5,23 +5,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject characterSheetMenu;
-    [SerializeField] private GameObject shopMenu;
 
     private void Start()
     {
         characterSheetMenu.SetActive(false);
-    }
-
-    private void Update()
-    {
-        if (!shopMenu.activeSelf)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
     }
 
     private void OnEnable()

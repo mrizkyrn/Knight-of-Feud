@@ -96,7 +96,7 @@ PrefabInstance:
       value: ItemShopSlot Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 8993962735504291657, guid: 919fa8f53f342ca4bad5f0971f75dd4d, type: 3}
+    - {fileID: 9130763651120420055, guid: 919fa8f53f342ca4bad5f0971f75dd4d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 919fa8f53f342ca4bad5f0971f75dd4d, type: 3}
 --- !u!1 &417298534237999096 stripped
 GameObject:
@@ -113,7 +113,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6777873651333270437, guid: 919fa8f53f342ca4bad5f0971f75dd4d, type: 3}
   m_PrefabInstance: {fileID: 1272532350842320307}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5319116998006797014
+--- !u!114 &6995486418527475247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,5 +127,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   borderImage: {fileID: 5221736620995750026}
   image: {fileID: 417298534237999096}
-  shopManager: {fileID: 0}
   item: {fileID: 0}

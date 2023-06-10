@@ -20,7 +20,7 @@ public class PlayerSlideState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
-
+        player.PlaySoundEffect("Slide");
         player.InputHandler.UseSlideInput();
         CanSlide = false;
 

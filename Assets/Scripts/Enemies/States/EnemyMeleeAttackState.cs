@@ -53,10 +53,12 @@ public class EnemyMeleeAttackState : EnemyAttackState
 				if (isPlayerShielding)
 				{
 					entity.player.playerStats.ShieldDurability.Decrease(entity.enemyData.meleeAttackDamage);
+					entity.player.PlaySoundEffect("Shield", 0.3f);
 				}
 				else
 				{
 					damageable.Damage(entity.enemyData.meleeAttackDamage);
+					entity.player.PlaySoundEffect("TakeHit", 0.3f);
 				}
 			}
 

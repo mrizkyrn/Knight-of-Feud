@@ -34,10 +34,16 @@ public class PlayerShieldState : PlayerAbilityState
             core.Movement.SetVelocityZero();
         }
 
-        if (!shieldInput || player.playerStats.ShieldDurability.CurrentValue <= 0)
+        if (!shieldInput)
         {
             isAbilityDone = true;
         }
+        else if (player.playerStats.ShieldDurability.CurrentValue <= 0)
+        {
+            player.PlaySoundEffect("BrokenShield");
+            isAbilityDone = true;
+        }
+
     }
     
 }

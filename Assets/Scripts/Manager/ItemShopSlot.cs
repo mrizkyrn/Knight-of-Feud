@@ -7,6 +7,8 @@ public class ItemShopSlot : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private GameObject borderImage;
     [SerializeField] private GameObject image;
+    
+    private AudioSource selectSound;
     private ShopManager shopManager;
 
     public Item item;
@@ -15,13 +17,8 @@ public class ItemShopSlot : MonoBehaviour, IPointerClickHandler
     {
         borderImage.SetActive(false);
         shopManager = GameObject.Find("GameManager").GetComponent<ShopManager>();
+        selectSound = GetComponent<AudioSource>();
     }
-
-    // private void Start()
-    // {
-    //     shopManager.OnItemSelected += OnItemSelected;
-    //     shopManager.OnItemDeselected += OnItemDeselected;
-    // }
 
     private void OnEnable()
     {
@@ -43,6 +40,7 @@ public class ItemShopSlot : MonoBehaviour, IPointerClickHandler
 
     private void OnItemSelected(ItemShopSlot selectedItem)
     {
+        selectSound.Play();
         if (selectedItem == this)
         {
             borderImage.SetActive(true);

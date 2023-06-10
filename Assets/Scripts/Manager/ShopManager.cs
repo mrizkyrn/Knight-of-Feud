@@ -20,6 +20,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private TMP_Text priceTxt;
 
     [SerializeField] private Button buyButton;
+    [SerializeField] private AudioSource buySFX;
 
     public event Action<ItemShopSlot> OnItemSelected;
     public event Action<ItemShopSlot> OnItemDeselected;
@@ -94,6 +95,7 @@ public class ShopManager : MonoBehaviour
         {
             if (PlayerStats.Instance.Gold.CurrentValue >= selectedItem.item.buyingPrice)
             {
+                buySFX.Play();
                 InventoryManager.Instance.AddItem(selectedItem.item);
                 PlayerStats.Instance.Gold.Decrease(selectedItem.item.buyingPrice);
                 Debug.Log("Item berhasil dibeli");

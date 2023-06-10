@@ -32,10 +32,12 @@ public class Shop : MonoBehaviour
     public void Open()
     {
         shopMenu.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void Close()
     {
         shopMenu.SetActive(false);
+        Time.timeScale = 1f;
     }
 }

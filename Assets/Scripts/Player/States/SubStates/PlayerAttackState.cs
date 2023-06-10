@@ -17,6 +17,7 @@ public class PlayerAttackState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
+        // player.PlaySoundEffect("Attack1", 0.3f);
 
         player.InputHandler.UseAttackInput();
         lastAttackTime = Time.time;
@@ -54,6 +55,10 @@ public class PlayerAttackState : PlayerAbilityState
 
                 if (attackCount < 3)
                 {
+                    // if (attackCount == 1)
+                    //     player.PlaySoundEffect("Attack2", 0.3f);
+                    // else
+                    //     player.PlaySoundEffect("Attack3", 0.3f);
                     attackCount++;
                     lastAttackTime = Time.time;
                 }   

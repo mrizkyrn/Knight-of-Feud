@@ -21,6 +21,8 @@ public class ChestController : MonoBehaviour
     [SerializeField] private List<ItemChance> itemChances;
     [SerializeField] private CollectedItem UI;
 
+    private AudioSource collectSound;
+
     private bool isOpened;
     private bool isOnChestArea;
 
@@ -28,6 +30,8 @@ public class ChestController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         isOpened = false;
+
+        collectSound = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -99,6 +103,7 @@ public class ChestController : MonoBehaviour
 
     public void Open()
     {
+        collectSound.Play();
         AddRandomGold();
         AddRandomItem();
 

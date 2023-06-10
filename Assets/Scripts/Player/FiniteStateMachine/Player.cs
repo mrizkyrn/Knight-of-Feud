@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+[System.Serializable]
+public class SoundEffectEntry
+{
+    public string name;
+    public AudioClip audioClip;
+}
+
 public class Player : MonoBehaviour, IDataPersistence
 {
     #region State Variables
@@ -30,6 +37,12 @@ public class Player : MonoBehaviour, IDataPersistence
     
     [SerializeField] public Transform attackPoint;
     [SerializeField] public TMP_Text fpsText;
+    #endregion
+
+    #region Musics
+    public SoundEffectEntry[] soundEffects;
+
+    private AudioSource audioSource;
     #endregion
 
     #region Other Variables
@@ -71,6 +84,15 @@ public class Player : MonoBehaviour, IDataPersistence
         StateMachine.Initialize(IdleState);
 
         Core.Stats.OnHealthZero += Death;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // Set the audio source to not play on awake
+        audioSource.playOnAwake = false;
     }
 
     private void Update()
@@ -99,6 +121,7 @@ public class Player : MonoBehaviour, IDataPersistence
     {
         if (AttackState.attackCount >= 1)
         {
+            PlaySoundEffect("Attack2", 0.3f);
             Anim.SetTrigger("attack2");
         }
     }
@@ -107,10 +130,16 @@ public class Player : MonoBehaviour, IDataPersistence
     {
         if (AttackState.attackCount >= 2)
         {
+            PlaySoundEffect("Attack3", 0.3f);
             Anim.SetTrigger("attack3");
         }
     }
 
+    private void Attack1SoundEffect()
+    {
+        PlaySoundEffect("Attack1", 0.3f);
+    }
+    
     private void MovementStartTrigger()
     {
         // Core.Movement.SetVelocityX(playerData.movementAttack[AttackState.attackCount] * Core.Movement.FacingDirection);
@@ -184,5 +213,21 @@ public class Player : MonoBehaviour, IDataPersistence
     public void SaveData(ref GameData data)
     {
         throw new System.NotImplementedException();
+    }
+    
+    public void PlaySoundEffect(string name, float volume = 1.0f)
+    {
+        foreach (var entry in soundEffects)
+        {
+            if (entry.name == name)
+            {
+                AudioClip audioClip = entry.audioClip;
+                if (audioClip != null)
+                {
+                    audioSource.PlayOneShot(audioClip, volume);
+                }
+                return;
+            }
+        }
     }
 }
