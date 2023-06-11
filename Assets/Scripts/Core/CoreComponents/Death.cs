@@ -3,6 +3,9 @@ using UnityEngine;
 public class Death : CoreComponent
 {
     [SerializeField] private GameObject[] deathParticles;
+    [SerializeField] private CollectedItem collectedItem;
+    [SerializeField] private Sprite imageGold;
+    [SerializeField] private Sprite imageXP;
 
     private void Start()
     {
@@ -15,8 +18,11 @@ public class Death : CoreComponent
     {
         if (!transform.parent.parent.CompareTag("Player"))
         {
+            collectedItem.SetCollectItemUI(imageGold, "Gold", core.Stats.getGold.ToString());
+            collectedItem.SetCollectItemUI(imageXP, "XP", core.Stats.getXP.ToString());
             PlayerStats.Instance.IncreaseXP(core.Stats.getXP);
             PlayerStats.Instance.Gold.Increase(core.Stats.getGold);
+            core.transform.gameObject.SetActive(false);
         }
 
         foreach (var particle in deathParticles)
@@ -24,7 +30,6 @@ public class Death : CoreComponent
             core.ParticleManager.StartParticles(particle);
         }
 
-        core.transform.gameObject.SetActive(false);
     }
 
     private void OnDisable()

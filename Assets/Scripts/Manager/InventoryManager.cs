@@ -28,7 +28,7 @@ public class InventoryManager : MonoBehaviour
     public void AddItem(Item item)
     {
         inventoryItems.Add(item);
-        ShortcutUpdate();
+        // ShortcutUpdate();
     }
 
     public void RemoveItem(Item item)

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
+    [SerializeField] private GameObject shopMenu;
     [SerializeField] private GameObject itemShopSlotPrefab;
     [SerializeField] private Transform potionsContent;
     [SerializeField] private Item[] potionItems;
@@ -55,6 +56,12 @@ public class ShopManager : MonoBehaviour
         buyButton.onClick.AddListener(BuyOrSellItem);
         itemImage.gameObject.SetActive(false);
         buyButton.gameObject.SetActive(false);
+        SetActiveShopMenu(false);
+    }
+
+    public void SetActiveShopMenu(bool isActive)
+    {
+        shopMenu.SetActive(isActive);
     }
 
     public void SetSellContent()

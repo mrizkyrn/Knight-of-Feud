@@ -18,5 +18,5 @@ MonoBehaviour:
   itemName: Lv1 Health Potion
   level: 1
   description: Increase HP by 25% of max HP
-  sellingPrice: 5
-  buyingPrice: 10
+  buyingPrice: 150
+  damageWeapon: 0

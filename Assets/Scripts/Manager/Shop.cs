@@ -5,13 +5,11 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     [SerializeField] private GameObject UI;
-    [SerializeField] private GameObject shopMenu;
     [SerializeField] private ShopManager shopManager;
 
     private void Start()
     {
         UI.SetActive(false);
-        shopMenu.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -32,14 +30,14 @@ public class Shop : MonoBehaviour
 
     public void Open()
     {
-        shopMenu.SetActive(true);
+        shopManager.SetActiveShopMenu(true);
         shopManager.SetSellContent();
         Time.timeScale = 0f;
     }
 
     public void Close()
     {
-        shopMenu.SetActive(false);
+        shopManager.SetActiveShopMenu(false);
         shopManager.ResetSellContent();
         Time.timeScale = 1f;
     }

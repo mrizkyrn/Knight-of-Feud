@@ -18,5 +18,5 @@ MonoBehaviour:
   itemName: Lv3 Health Potion
   level: 3
   description: Increase HP by 100% of max HP
-  sellingPrice: 5
-  buyingPrice: 10
+  buyingPrice: 300
+  damageWeapon: 0

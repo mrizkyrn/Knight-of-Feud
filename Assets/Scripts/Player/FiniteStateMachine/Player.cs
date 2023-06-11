@@ -46,7 +46,7 @@ public class Player : MonoBehaviour, IDataPersistence
     #endregion
 
     #region Other Variables
-    public bool IsAlive { get; private set; }
+    public bool IsAlive { get; set; }
     public bool IsShielding { get; set; }
 
     private int lastFrameIndex;
@@ -83,7 +83,8 @@ public class Player : MonoBehaviour, IDataPersistence
 
         StateMachine.Initialize(IdleState);
 
-        Core.Stats.OnHealthZero += Death;
+        PlayerStats.Instance.Health.OnCurrentValueZero += Death;
+        // Core.Stats.OnHealthZero += Death;
 
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
@@ -161,6 +162,11 @@ public class Player : MonoBehaviour, IDataPersistence
         InputHandler.OnDisable();
     }
 
+    private void Respawned()
+    {
+
+    }
+
     private void AttackTrigger()
     {
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackPoint.position, playerData.attackRange, playerData.enemyLayerMask);
@@ -186,7 +192,8 @@ public class Player : MonoBehaviour, IDataPersistence
 
     private void OnDisable()
     {
-        Core.Stats.OnHealthZero -= Death;
+        // Core.Stats.OnHealthZero -= Death;
+        PlayerStats.Instance.Health.OnCurrentValueZero -= Death;
     }
 
     private float CalculateFPS()

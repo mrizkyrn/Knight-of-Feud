@@ -644,6 +644,40 @@ SpriteAtlas:
   - {fileID: -1887193216, guid: 72c1719c3ddd8b143bc3ad42b8431643, type: 3}
   - {fileID: 21300000, guid: 972ed59ca0883cd428dccaaf85ad23f6, type: 3}
   - {fileID: 21300000, guid: 8140ac5fde7ad7c46a3578bbd9367c3f, type: 3}
+  - {fileID: 1491891587, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -1143831990, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: 1668328732, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: 136361411, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: 1339920135, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: 184888810, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -13596814, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -1002978480, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: 499023862, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -2121917208, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -526873245, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -452153589, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -1916806942, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: 749875734, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -2121873097, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -2123231614, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -529564001, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -418063290, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -270822842, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -769865477, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: 690824229, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: 1267119622, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: 372936087, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -1023723630, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -933979117, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -1477965702, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: 2021248067, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: 957889041, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: 1462100864, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -1769105324, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -443762722, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -2142419892, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: 243789810, guid: 912a207f0b2dac846a847f72493addea, type: 3}
+  - {fileID: -183825660, guid: 912a207f0b2dac846a847f72493addea, type: 3}
   m_PackedSpriteNamesToIndex:
   - rock_1
   - oak_woods_tileset_357
@@ -1238,6 +1272,40 @@ SpriteAtlas:
   - shop_anim_3
   - sign
   - fence_2
+  - ClosedSack
+  - Roof
+  - Pilar
+  - Food
+  - Jug1
+  - Jug3
+  - Straw1
+  - Paper1
+  - Jug2
+  - Straw2
+  - Paper3
+  - Paper2
+  - Paper4
+  - Woodpile
+  - Bucket
+  - BulletinBoard
+  - HangingBag
+  - Scarecrow
+  - Barrel
+  - Wood
+  - Food1
+  - OpenSack
+  - Food3
+  - Food2
+  - Food4
+  - FoodTable
+  - Bench
+  - Salt
+  - HoneyBag
+  - Teapot
+  - BoxFood
+  - Box2
+  - Box1
+  - Well
   m_RenderDataMap: {}
   m_Tag: Sprite Atlas
   m_IsVariant: 0

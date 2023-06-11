@@ -9,7 +9,16 @@ public class CollectedItem : MonoBehaviour
     [SerializeField] private GameObject collectedItemPrefab;
     [SerializeField] private float displayDuration;
 
+    public static CollectedItem Instance { get; private set; }
     private List<Item> Items = new List<Item>();
+    
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
 
     public void SetCollectItemUI(Sprite icon, string name, string amount)
     {

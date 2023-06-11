@@ -17,6 +17,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 35a20e5a3ff052f4a9e38849cb2cc213, type: 3}
   itemName: Basic Weapon
   level: 0
-  description: Increase your damage by 10
-  buyingPrice: 50
+  description: Meningkatkan damage player sebesar 10
+  buyingPrice: 200
   damageWeapon: 10

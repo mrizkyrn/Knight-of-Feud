@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     private void OpenCharacterMenu()
     {
+        Debug.Log("Open Menu");
         if (!characterSheetMenu.activeSelf)
         {
             Time.timeScale = 0f;
