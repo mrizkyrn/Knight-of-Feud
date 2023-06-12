@@ -50,14 +50,16 @@ public class EnemyMeleeAttackState : EnemyAttackState
 
 			if (damageable != null) 
             {
+				float newDamage = Mathf.Max(entity.enemyData.meleeAttackDamage - PlayerStats.Instance.Defense.CurrentValue, 0f);
+
 				if (isPlayerShielding)
 				{
-					entity.player.playerStats.ShieldDurability.Decrease(entity.enemyData.meleeAttackDamage);
+					PlayerStats.Instance.ShieldDurability.Decrease(newDamage);
 					entity.player.PlaySoundEffect("Shield", 0.3f);
 				}
 				else
 				{
-					damageable.Damage(entity.enemyData.meleeAttackDamage);
+					damageable.Damage(newDamage);
 					entity.player.PlaySoundEffect("TakeHit", 0.3f);
 				}
 			}

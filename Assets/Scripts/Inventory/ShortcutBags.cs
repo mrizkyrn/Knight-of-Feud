@@ -16,13 +16,21 @@ public class ShortcutBags : MonoBehaviour
         InputHandler.Instance.OnUseItem3Pressed += UseItem3;
 
         itemShortcutBags = new ShortcutBag[InventoryManager.Instance.shortcutAmount];
-
-        for (int i = 0; i < InventoryManager.Instance.shortcutAmount; i++)
+        
+        for (int i = 0; i < transform.childCount; i++)
         {
-            GameObject bagGO = Instantiate(shortcutBagPrefab, transform);
-            ShortcutBag shortcutBag = bagGO.GetComponent<ShortcutBag>();
+            Transform child = transform.GetChild(i);
+            // Do something with the child GameObject
+            // For example:
+            ShortcutBag shortcutBag = child.GetComponent<ShortcutBag>();
             itemShortcutBags[i] = shortcutBag;
         }
+        // for (int i = 0; i < InventoryManager.Instance.shortcutAmount; i++)
+        // {
+        //     GameObject bagGO = Instantiate(shortcutBagPrefab, transform);
+        //     ShortcutBag shortcutBag = bagGO.GetComponent<ShortcutBag>();
+        //     itemShortcutBags[i] = shortcutBag;
+        // }
     }
 
     public void AddToBag(Item item)

@@ -9,6 +9,7 @@ public class InputHandler : MonoBehaviour
     private PlayerInput inputHandler;
 
     public event Action OnInventoryPressed;
+    public event Action OnPausePressed;
     public event Action OnOpenChestPressed;
     public event Action OnUseItem1Pressed;
     public event Action OnUseItem2Pressed;
@@ -28,6 +29,7 @@ public class InputHandler : MonoBehaviour
     {
         inputHandler.GameMenu.Enable();
         inputHandler.GameMenu.Inventory.performed += OnCharacterMenu;
+        inputHandler.GameMenu.Pause.performed += OnPauseMenu;
 
         inputHandler.Gameplay.Enable();
         inputHandler.Gameplay.OpenChest.performed += OnOpenChest;
@@ -40,6 +42,7 @@ public class InputHandler : MonoBehaviour
     {
         inputHandler.GameMenu.Disable();
         inputHandler.GameMenu.Inventory.performed -= OnCharacterMenu;
+        inputHandler.GameMenu.Pause.performed -= OnPauseMenu;
         
         inputHandler.Gameplay.Disable();
         inputHandler.Gameplay.OpenChest.performed -= OnOpenChest;
@@ -51,6 +54,11 @@ public class InputHandler : MonoBehaviour
     private void OnCharacterMenu(InputAction.CallbackContext context)
     {
         OnInventoryPressed?.Invoke();
+    }
+
+    private void OnPauseMenu(InputAction.CallbackContext context)
+    {
+        OnPausePressed?.Invoke();
     }
 
     private void OnOpenChest(InputAction.CallbackContext context)

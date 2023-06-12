@@ -38,7 +38,7 @@ public class PlayerShieldState : PlayerAbilityState
         {
             isAbilityDone = true;
         }
-        else if (player.playerStats.ShieldDurability.CurrentValue <= 0)
+        else if (PlayerStats.Instance.ShieldDurability.CurrentValue <= 0)
         {
             player.PlaySoundEffect("BrokenShield");
             isAbilityDone = true;

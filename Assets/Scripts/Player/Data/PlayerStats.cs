@@ -52,7 +52,7 @@ public class PlayerStats : MonoBehaviour
     {
         Health.IncreaseMaxValue(50f);
         Gold.Increase(100f);
-        Damage.Increase(50f);
+        Damage.Increase(10f);
         Defense.Increase(5f);
     }
 

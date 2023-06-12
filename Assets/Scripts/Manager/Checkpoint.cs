@@ -4,21 +4,30 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
+    [SerializeField] private GameObject UI;
     private Transform player;
     private Vector3 lastCheckpointPosition;
-    private float respawnDelay = 3f; // Delay in seconds before respawn
-
     private Player playerRef;
+    private Animator anim;
+    private AudioSource teleportSFX;
+
+    private float respawnDelay = 3f;
+    private bool isActive;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerRef = player.GetComponent<Player>();
+        anim = GetComponent<Animator>();
+        teleportSFX = GetComponent<AudioSource>();
 
         lastCheckpointPosition = player.position;
         Debug.Log(lastCheckpointPosition);
 
         PlayerStats.Instance.Health.OnCurrentValueZero += RespawnAtLastCheckpoint;
+
+        UI.SetActive(false);
+        isActive = false;
     }
 
     private void OnDisable()
@@ -51,8 +60,34 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SetCheckpoint(other.transform.position);
-            Debug.Log("Checkpoint set!");
+            if (!isActive)
+            {
+                UI.SetActive(true);
+            }
+            else
+            {
+                SetCheckpoint(other.transform.position);
+                PlayerStats.Instance.Health.Increase(PlayerStats.Instance.Health.MaxValue);
+            }
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (UI.activeSelf)
+            {
+                UI.SetActive(false);
+            }
+        }
+    }
+
+    public void OnActivePortal()
+    {
+        teleportSFX.Play();
+        anim.SetTrigger("active");
+        isActive = true;
+        UI.SetActive(false);
     }
 }

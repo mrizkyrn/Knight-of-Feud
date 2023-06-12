@@ -30,7 +30,6 @@ public class Player : MonoBehaviour, IDataPersistence
     #region Components
     [SerializeField] private PlayerData playerData;
 
-    public PlayerStats playerStats { get; private set; }
     public Core Core { get; private set; }
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
@@ -79,7 +78,6 @@ public class Player : MonoBehaviour, IDataPersistence
     {
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
-        playerStats = GetComponent<PlayerStats>();
 
         StateMachine.Initialize(IdleState);
 
@@ -177,8 +175,8 @@ public class Player : MonoBehaviour, IDataPersistence
 
 			if (damageable != null)
             {
-                Debug.Log(playerStats.Damage.CurrentValue);
-				damageable.Damage(playerStats.Damage.CurrentValue);
+                Debug.Log(PlayerStats.Instance.Damage.CurrentValue);
+				damageable.Damage(PlayerStats.Instance.Damage.CurrentValue);
 			}
 
 			IKnockbackable knockbackable = collider.GetComponent<IKnockbackable>();

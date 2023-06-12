@@ -142,8 +142,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4932f65d-7cb6-43cf-a5aa-33ebe6526aee"",
-                    ""path"": ""<Keyboard>/j"",
+                    ""id"": ""4714c579-3a7a-4f24-8d5c-fc7c92e1e919"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Dekstop"",
@@ -153,8 +153,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4714c579-3a7a-4f24-8d5c-fc7c92e1e919"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""4932f65d-7cb6-43cf-a5aa-33ebe6526aee"",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Dekstop"",
@@ -197,17 +197,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""15f0513f-d4f6-468d-9829-41c314b988b6"",
-                    ""path"": ""<Keyboard>/k"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Dekstop"",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""0bca0963-e870-4236-9690-f886aa43e39c"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -219,11 +208,33 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""15f0513f-d4f6-468d-9829-41c314b988b6"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Dekstop"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""09023436-c20b-45e2-b8e4-a0f47eec8b89"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Dekstop"",
+                    ""action"": ""Shield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8df5737f-098f-4210-b2c1-0479f71cb1df"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Shield"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -242,6 +253,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""ce6f70e3-5a8b-4391-bf3b-c9536ae3b2d7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -253,6 +273,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df5cf31e-f7d3-4cec-b67f-4a1b404708d2"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -396,6 +427,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         // GameMenu
         m_GameMenu = asset.FindActionMap("GameMenu", throwIfNotFound: true);
         m_GameMenu_Inventory = m_GameMenu.FindAction("Inventory", throwIfNotFound: true);
+        m_GameMenu_Pause = m_GameMenu.FindAction("Pause", throwIfNotFound: true);
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_OpenChest = m_Gameplay.FindAction("OpenChest", throwIfNotFound: true);
@@ -528,11 +560,13 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GameMenu;
     private IGameMenuActions m_GameMenuActionsCallbackInterface;
     private readonly InputAction m_GameMenu_Inventory;
+    private readonly InputAction m_GameMenu_Pause;
     public struct GameMenuActions
     {
         private @PlayerInput m_Wrapper;
         public GameMenuActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Inventory => m_Wrapper.m_GameMenu_Inventory;
+        public InputAction @Pause => m_Wrapper.m_GameMenu_Pause;
         public InputActionMap Get() { return m_Wrapper.m_GameMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -545,6 +579,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Inventory.started -= m_Wrapper.m_GameMenuActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_GameMenuActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_GameMenuActionsCallbackInterface.OnInventory;
+                @Pause.started -= m_Wrapper.m_GameMenuActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_GameMenuActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_GameMenuActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_GameMenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -552,6 +589,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -641,6 +681,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     public interface IGameMenuActions
     {
         void OnInventory(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IGameplayActions
     {

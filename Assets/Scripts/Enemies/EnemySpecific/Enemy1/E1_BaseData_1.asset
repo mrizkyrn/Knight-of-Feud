@@ -21,7 +21,7 @@ MonoBehaviour:
   amountOfTurns: 2
   timeBetweenTurns: 0.75
   meleeAttackRadius: 0.5
-  meleeAttackDamage: 10
+  meleeAttackDamage: 50
   knockbackAngle: {x: 1, y: 1}
   knockbackStrength: 10
   knockbackStrengthShield: 7

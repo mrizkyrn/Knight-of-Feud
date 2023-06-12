@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Village_1.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/MainMenu.unity
+    guid: 813f80ebfa2da004b8776cdf70cd1597
   - enabled: 1
     path: Assets/Scenes/VillageArea.unity
     guid: cdb291b507e8fd84488bf3eeb18f76af
+  - enabled: 1
+    path: Assets/Scenes/ToBeContinue.unity
+    guid: d726b2ce0f516ca4c956c22881df597e
   m_configObjects: {}

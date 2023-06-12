@@ -120,8 +120,8 @@
                 },
                 {
                     "name": "",
-                    "id": "4932f65d-7cb6-43cf-a5aa-33ebe6526aee",
-                    "path": "<Keyboard>/j",
+                    "id": "4714c579-3a7a-4f24-8d5c-fc7c92e1e919",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Dekstop",
@@ -131,8 +131,8 @@
                 },
                 {
                     "name": "",
-                    "id": "4714c579-3a7a-4f24-8d5c-fc7c92e1e919",
-                    "path": "<Keyboard>/space",
+                    "id": "4932f65d-7cb6-43cf-a5aa-33ebe6526aee",
+                    "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
                     "groups": "Dekstop",
@@ -175,17 +175,6 @@
                 },
                 {
                     "name": "",
-                    "id": "15f0513f-d4f6-468d-9829-41c314b988b6",
-                    "path": "<Keyboard>/k",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Dekstop",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0bca0963-e870-4236-9690-f886aa43e39c",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -197,11 +186,33 @@
                 },
                 {
                     "name": "",
+                    "id": "15f0513f-d4f6-468d-9829-41c314b988b6",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Dekstop",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "09023436-c20b-45e2-b8e4-a0f47eec8b89",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Dekstop",
+                    "action": "Shield",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8df5737f-098f-4210-b2c1-0479f71cb1df",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -220,6 +231,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "ce6f70e3-5a8b-4391-bf3b-c9536ae3b2d7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -231,6 +251,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df5cf31e-f7d3-4cec-b67f-4a1b404708d2",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
